@@ -5,12 +5,16 @@ import Lead from '@/components/ui/Lead'
 import { fireConfetti } from '@/components/ui/Confetti'
 import Badge from './Badge'
 import Road from './Road'
+import Sun from './Sun'
+import Moon from './Moon'
 import styles from './Hero.module.css'
 
 export default function Hero() {
   const { t } = useApp()
   return (
     <section id="top" className={styles.hero}>
+      <Sun />
+      <Moon />
       <Badge />
       <div className={styles.content}>
         <p className={styles.kicker}>{t.kicker}</p>
