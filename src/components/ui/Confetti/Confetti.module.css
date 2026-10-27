@@ -1,0 +1,2 @@
+.bits { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.bit { position: absolute; width: 10px; height: 14px; border-radius: 3px; }

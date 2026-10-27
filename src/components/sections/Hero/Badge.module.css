@@ -1,0 +1,11 @@
+.badge { position: absolute; z-index: 1; right: var(--gutter); bottom: 8vh; width: 150px; }
+.ring { transform-origin: 60px 60px; animation: spin 24s linear infinite; }
+.bt { fill: #0a2540; }
+:global([data-theme='dark']) .bt { fill: #bfe7f5; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Mobil: möhür absolute deyil, hero-nun sonunda ortada durur */
+@media (max-width: 800px) {
+  .badge { position: static; order: 3; justify-self: center; width: min(150px, 42vw); margin-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .ring { animation: none; } }

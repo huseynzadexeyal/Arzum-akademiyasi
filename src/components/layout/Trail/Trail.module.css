@@ -1,0 +1,5 @@
+.trail { position: fixed; z-index: 9; left: 12px; top: 110px; bottom: 24px; width: 6px; border-radius: 6px; background: var(--line); }
+.fill { position: absolute; inset: 0; border-radius: 6px; transform-origin: top; background: linear-gradient(var(--blue), var(--red), var(--green)); }
+.kid { position: absolute; left: 3px; font-size: 26px; line-height: 1; transform: translate(-50%, -50%); }
+
+@media (max-width: 800px) { .trail { display: none; } }

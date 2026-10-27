@@ -1,0 +1,8 @@
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px;
+  padding: clamp(56px, 10vh, 96px) var(--gutter); background: var(--navy); color: #cfe0ea;
+  content-visibility: auto; contain-intrinsic-size: auto 400px;
+}
+.stats div { display: flex; flex-direction: column; gap: 8px; }
+.num { font: 700 clamp(2.4rem, 5.5vw, 4rem) / 1 var(--display); letter-spacing: -0.03em; color: var(--sun); }
+.stats div > span { font-size: 1.05rem; }

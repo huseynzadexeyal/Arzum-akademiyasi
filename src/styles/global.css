@@ -1,0 +1,55 @@
+:root {
+  /* Bayraq rəngləri */
+  --blue: #00b5e2;
+  --red: #dc2a3e;
+  --green: #3f8f2b;
+  --sun: #ffc83d;
+  --navy: #0a2540;
+
+  --page: #f6fafc;
+  --ink: #12304a;
+  --heading: #0a2540;
+  --line: #d7e5ec;
+  --gutter: max(5vw, calc((100vw - 1180px) / 2));
+
+  --display: 'Unbounded', 'Onest', system-ui, sans-serif;
+  --body: 'Onest', system-ui, sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #07131d;
+  --ink: #dceaf2;
+  --heading: #eaf7fc;
+  --line: #1b3347;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+body {
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--page);
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; letter-spacing: -0.015em; }
+a { color: inherit; }
+button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+@media (max-width: 800px) {
+  html { scroll-padding-top: 118px; }
+  body { padding-bottom: 76px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

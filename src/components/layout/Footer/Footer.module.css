@@ -1,0 +1,5 @@
+.foot {
+  padding: 36px var(--gutter); background: var(--navy); color: #cfe0ea; text-align: center;
+  content-visibility: auto; contain-intrinsic-size: auto 160px;
+}
+.links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 6px; }

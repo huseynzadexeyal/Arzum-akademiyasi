@@ -1,0 +1,18 @@
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; margin: 0 10px 10px 0; padding: 12px 28px;
+  border: 2px solid transparent; border-radius: 999px;
+  font: 600 1rem/1 var(--body); text-decoration: none; cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn.sm { min-height: 44px; padding: 8px 20px; margin: 0; }
+
+.red   { background: var(--red); color: #fff; }
+.red:hover { background: #c41f33; }
+.navy  { background: var(--navy); color: #fff; }
+.navy:hover { background: #0e3358; }
+:global([data-theme='dark']) .navy { background: #fff; color: var(--navy); }
+.ghost { border-color: currentColor; background: transparent; color: inherit; }
+.ghost:hover { background: #ffffff33; }

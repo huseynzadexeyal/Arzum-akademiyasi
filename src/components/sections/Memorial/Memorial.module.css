@@ -1,0 +1,28 @@
+.memorial {
+  display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center;
+  padding: clamp(64px, 11vh, 120px) var(--gutter); background: var(--navy); color: #fff;
+  content-visibility: auto; contain-intrinsic-size: auto 640px;
+}
+.title { margin-bottom: 8px; font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 700; color: #fff; }
+.name { margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; color: var(--sun); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px 28px; max-width: 62ch; margin-bottom: 22px; }
+.facts dt { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #9fbccd; }
+.facts dd { margin: 2px 0 0; font-size: 1.02rem; color: #fff; }
+.text { max-width: 58ch; font-size: 1.1rem; color: #dbe8f0; }
+.quote { max-width: 58ch; margin: 22px 0; padding-left: 16px; border-left: 4px solid var(--sun); font-style: italic; color: #fff; }
+.medalsH { margin-bottom: 8px; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #9fbccd; }
+.medals { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.medals li { padding: 6px 14px; border: 1px solid var(--sun); border-radius: 999px; font-size: .92rem; color: #fff; }
+.photo { width: 280px; height: 360px; object-fit: cover; object-position: top; border: 5px solid var(--sun); border-radius: 20px; }
+
+@media (max-width: 800px) {
+  .memorial { grid-template-columns: 1fr; justify-items: center; gap: 28px; padding-top: 56px; padding-bottom: 56px; text-align: center; }
+  .photo { display: block; width: min(280px, 100%); height: auto; aspect-ratio: 7 / 9; margin: 0 auto; }
+  .facts { grid-template-columns: 1fr 1fr; margin-inline: auto; text-align: center; }
+  .text, .quote { margin-inline: auto; }
+  .quote { padding: 14px 0 0; border-left: 0; border-top: 3px solid var(--sun); }
+  .medals { justify-content: center; }
+}
+@media (max-width: 420px) {
+  .facts { grid-template-columns: 1fr; }
+}

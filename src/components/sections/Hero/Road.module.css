@@ -1,0 +1,4 @@
+.road { position: relative; z-index: 1; width: 100%; height: auto; overflow: visible; }
+.lbl { font-family: 'Unbounded', 'Onest', sans-serif; font-size: 21px; font-weight: 700; fill: #0a2540; }
+:global([data-theme='dark']) .lbl { fill: #eaf7fc; }
+:global([data-theme='dark']) .rd { stroke: #2b5c80; }

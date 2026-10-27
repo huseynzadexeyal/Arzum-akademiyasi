@@ -1,0 +1,7 @@
+.swatches { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
+.swatch { width: 44px; height: 44px; border: 0; border-radius: 50%; cursor: pointer; transition: transform 0.15s; }
+.swatch:hover { transform: scale(1.08); }
+.swatch[aria-pressed='true'] { outline: 3px solid var(--navy); outline-offset: 3px; }
+:global([data-theme='dark']) .swatch[aria-pressed='true'] { outline-color: #fff; }
+
+.paper { width: 100%; height: auto; background: #fff; border-radius: 28px; touch-action: none; cursor: crosshair; }

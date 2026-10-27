@@ -1,0 +1,47 @@
+.hero {
+  --hero-bg: var(--blue);
+  position: relative; z-index: 2;
+  overflow-x: clip;
+  display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: 3vw;
+  padding: 7vh var(--gutter) 14vh;
+  background: var(--hero-bg);
+  color: var(--navy);
+}
+
+/* Markiz (awning): hero-nun alt kənarı səhifəyə sallanan yarımdairələrlə bitir */
+.hero::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 26px; pointer-events: none;
+  background: radial-gradient(circle at 50% 0, var(--hero-bg) 0 24px, transparent 25px) 0 0 / 52px 26px repeat-x;
+}
+
+.content { position: relative; z-index: 1; }
+.kicker { margin-bottom: 14px; font-weight: 700; }
+.title { margin-bottom: 22px; font-size: clamp(1.9rem, 4.1vw, 3.3rem); font-weight: 700; color: var(--navy); }
+.wm { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.12em; margin-right: 0.25em; }
+.wm span { display: inline-block; }
+
+/* ---- qaranlıq rejim: ulduzlu gecə səması ---- */
+:global([data-theme='dark']) .hero { --hero-bg: #12273a; background: linear-gradient(#08121e, #12273a); color: #eaf7fc; }
+:global([data-theme='dark']) .title { color: #eaf7fc; }
+:global([data-theme='dark']) .hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(2px 2px at 6% 10%, #fff, #0000), radial-gradient(2px 2px at 14% 34%, #fff, #0000),
+    radial-gradient(2px 2px at 22% 8%, #fff, #0000), radial-gradient(2px 2px at 31% 22%, #fff, #0000),
+    radial-gradient(2px 2px at 38% 6%, #fff, #0000), radial-gradient(2px 2px at 47% 30%, #fff, #0000),
+    radial-gradient(2px 2px at 55% 12%, #fff, #0000), radial-gradient(2px 2px at 63% 26%, #fff, #0000),
+    radial-gradient(2px 2px at 71% 8%, #fff, #0000), radial-gradient(2px 2px at 78% 36%, #fff, #0000),
+    radial-gradient(2px 2px at 86% 14%, #fff, #0000), radial-gradient(2px 2px at 93% 28%, #fff, #0000),
+    radial-gradient(2px 2px at 9% 58%, #fff, #0000), radial-gradient(2px 2px at 27% 66%, #fff, #0000),
+    radial-gradient(2px 2px at 49% 70%, #fff, #0000), radial-gradient(2px 2px at 67% 62%, #fff, #0000),
+    radial-gradient(2px 2px at 88% 54%, #fff, #0000), radial-gradient(2px 2px at 96% 74%, #fff, #0000);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: 0.3; } to { opacity: 1; } }
+
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 5vh; padding-bottom: 12vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global([data-theme='dark']) .hero::before { animation: none; }
+}

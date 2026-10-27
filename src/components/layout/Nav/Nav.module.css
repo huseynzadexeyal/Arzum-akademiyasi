@@ -1,0 +1,43 @@
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px 5vw;
+  background: var(--page);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--display); font-size: 1.05rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  text-decoration: none; color: var(--heading);
+}
+.logo { width: 54px; height: 54px; flex: none; }
+
+.links { display: flex; gap: 26px; font-weight: 500; }
+.links a { text-decoration: none; }
+.links a:hover { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+
+.tools { display: flex; align-items: center; gap: 8px; }
+.langs { display: flex; gap: 4px; }
+
+.chip {
+  min-width: 44px; min-height: 44px; padding: 5px 10px;
+  border: 2px solid var(--heading); border-radius: 999px;
+  background: transparent; color: var(--heading);
+  font: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.chip[aria-pressed='true'] { background: var(--heading); color: var(--page); }
+:global([data-theme='dark']) .chip[aria-pressed='true'] { color: #0b3c5d; }
+
+@media (max-width: 800px) {
+  .nav { flex-wrap: wrap; gap: 4px 8px; padding: 8px 4vw 6px; }
+  .brand { min-width: 0; font-size: clamp(0.82rem, 3.8vw, 1.05rem); }
+  .logo { width: 46px; height: 46px; }
+  .links {
+    order: 3; width: 100%; flex-wrap: wrap; justify-content: space-between; gap: 0 6px;
+    font-size: clamp(0.74rem, 3.5vw, 0.95rem); white-space: nowrap;
+  }
+  .links a { padding: 8px 2px; }
+  .chip { min-width: 40px; min-height: 40px; padding: 4px 8px; }
+  .call { display: none; }
+}
