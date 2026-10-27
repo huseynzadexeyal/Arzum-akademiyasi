@@ -16,8 +16,9 @@
 .photo { width: 280px; height: 360px; object-fit: cover; object-position: top; border: 5px solid var(--sun); border-radius: 20px; }
 
 @media (max-width: 800px) {
-  .memorial { grid-template-columns: 1fr; justify-items: center; gap: 28px; padding-top: 56px; padding-bottom: 56px; text-align: center; }
-  .photo { display: block; width: min(280px, 100%); height: auto; aspect-ratio: 7 / 9; margin: 0 auto; }
+  .memorial { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 28px; padding-top: 56px; padding-bottom: 56px; text-align: center; }
+  .memorial > div { width: 100%; }
+  .photo { display: block; justify-self: center; width: min(260px, 72vw); height: auto; aspect-ratio: 7 / 9; margin: 0 auto; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
   .facts { grid-template-columns: 1fr 1fr; margin-inline: auto; text-align: center; }
   .text, .quote { margin-inline: auto; }
   .quote { padding: 14px 0 0; border-left: 0; border-top: 3px solid var(--sun); }
