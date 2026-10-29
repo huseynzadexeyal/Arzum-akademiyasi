@@ -32,8 +32,10 @@ export default function Hero() {
           ))}
         </h1>
         <Lead>{t.lead}</Lead>
-        <Button href="#qeydiyyat" onClick={fireConfetti}>{t.cta1}</Button>
-        <Button href="#fealiyyet" variant="ghost">{t.cta2}</Button>
+        <div className={styles.cta}>
+          <Button href="#qeydiyyat" onClick={fireConfetti}>{t.cta1}</Button>
+          <Button href="#fealiyyet" variant="ghost">{t.cta2}</Button>
+        </div>
       </div>
       <Road />
     </section>

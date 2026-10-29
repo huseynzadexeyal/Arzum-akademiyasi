@@ -13,9 +13,9 @@
 }
 .logo { width: 54px; height: 54px; flex: none; }
 
-.links { display: flex; gap: 26px; font-weight: 500; }
+.links { position: relative; display: flex; gap: 26px; font-weight: 500; }
 .links a { text-decoration: none; }
-.links a:hover { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+.links a:hover, .links a[aria-current='true'] { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 6px; }
 
 .tools { display: flex; align-items: center; gap: 8px; }
 .langs { display: flex; gap: 4px; }
@@ -30,14 +30,33 @@
 :global([data-theme='dark']) .chip[aria-pressed='true'] { color: #0b3c5d; }
 
 @media (max-width: 800px) {
-  .nav { flex-wrap: wrap; gap: 4px 8px; padding: 8px 4vw 6px; }
-  .brand { min-width: 0; font-size: clamp(0.82rem, 3.8vw, 1.05rem); }
-  .logo { width: 46px; height: 46px; }
-  .links {
-    order: 3; width: 100%; flex-wrap: wrap; justify-content: space-between; gap: 0 6px;
-    font-size: clamp(0.74rem, 3.5vw, 0.95rem); white-space: nowrap;
+  /* 1-ci sətir: loqo + dil/rejim. 2-ci sətir: sürüşən bölmə düymələri */
+  .nav {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'brand tools' 'links links';
+    align-items: center; gap: 2px 8px; padding: calc(8px + env(safe-area-inset-top, 0px)) 0 0;
+    box-shadow: 0 1px 0 var(--line);
   }
-  .links a { padding: 8px 2px; }
+  .brand { grid-area: brand; min-width: 0; padding-left: max(14px, 4vw); font-size: clamp(0.86rem, 4vw, 1.05rem); }
+  .logo { width: 44px; height: 44px; }
+  .tools { grid-area: tools; gap: 6px; padding-right: max(14px, 4vw); }
   .chip { min-width: 40px; min-height: 40px; padding: 4px 8px; }
   .call { display: none; }
+
+  .links {
+    grid-area: links; gap: 8px; padding: 6px 32px 10px max(14px, 4vw);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 30px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 30px), transparent);
+  }
+  .links::-webkit-scrollbar { display: none; }
+  .links a {
+    flex: none; display: inline-flex; align-items: center; min-height: 38px; padding: 6px 15px; scroll-snap-align: center;
+    border-radius: 999px; background: color-mix(in srgb, var(--heading) 8%, transparent);
+    font-size: 0.9rem; font-weight: 600; white-space: nowrap; text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .links a:hover { text-decoration: none; }
+  .links a[aria-current='true'] { background: var(--heading); color: var(--page); text-decoration: none; }
+  :global([data-theme='dark']) .links a[aria-current='true'] { color: #0b3c5d; }
 }

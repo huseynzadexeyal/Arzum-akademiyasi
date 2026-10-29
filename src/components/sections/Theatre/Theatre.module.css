@@ -1,0 +1,230 @@
+.lead { max-width: 640px; margin: -16px 0 32px; }
+
+/* ===== SƏHNƏ ===== */
+.stage {
+  --sky1: #7fd0ff; --sky2: #d9f3ff; --hill: #2e8b3a; --hill2: #47a84a; --orb: #ffe066;
+  position: relative; isolation: isolate; overflow: hidden;
+  aspect-ratio: 16 / 9; max-width: 860px; margin: 0 auto;
+  border: 10px solid #7a4a1e; border-top-width: 0; border-radius: 0 0 10px 10px;
+  background: #2a1a0f; box-shadow: 0 14px 0 #4d2d10, 0 28px 40px #0003; cursor: pointer;
+}
+.stage[data-scene='1'] { --sky1: #ffb36b; --sky2: #ffe3b8; --hill: #5a9c3a; --hill2: #7bb648; }
+.stage[data-scene='2'] { --sky1: #ffd48a; --sky2: #fff1cf; --hill: #8fbf45; --hill2: #b0d45a; }
+.stage[data-scene='3'] { --sky1: #ffc2d9; --sky2: #fff0f5; --hill: #6bb36b; --hill2: #8fcf7a; }
+.stage[data-scene='4'] { --sky1: #9be0ff; --sky2: #fff3b0; --hill: #78b83c; --hill2: #9bcf4f; }
+.stage[data-scene='5'] { --sky1: #2a1b5c; --sky2: #7a4fb5; --hill: #3b2a73; --hill2: #4b3590; --orb: #f4f1d0; }
+
+.scene {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse 45% 38% at 18% 100%, var(--hill) 0 98%, transparent 100%),
+    radial-gradient(ellipse 55% 30% at 82% 100%, var(--hill2) 0 98%, transparent 100%),
+    linear-gradient(var(--sky1), var(--sky2));
+}
+/* günəş / ay */
+.scene::after {
+  content: ''; position: absolute; top: 12%; right: 12%; width: 11%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--orb); box-shadow: 0 0 30px #fff8;
+}
+/* gecə nağılında ulduzlar */
+.stage[data-scene='5'] .scene::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle 2px at 14% 22%, #fff 98%, transparent), radial-gradient(circle 2px at 30% 12%, #fff 98%, transparent),
+    radial-gradient(circle 2px at 52% 26%, #fff 98%, transparent), radial-gradient(circle 2px at 66% 10%, #fff 98%, transparent),
+    radial-gradient(circle 2px at 40% 40%, #fff 98%, transparent), radial-gradient(circle 2px at 90% 36%, #fff 98%, transparent);
+}
+
+/* ===== KUKLALAR ===== */
+.puppets {
+  position: absolute; inset: auto 0 0 0; height: 80%; padding-bottom: 17%; z-index: 2;
+  display: flex; justify-content: center; align-items: flex-end; gap: clamp(8px, 3vw, 36px);
+}
+.puppet {
+  position: relative; will-change: transform; font-size: calc(clamp(2.6rem, 9vw, 5.6rem) * var(--sz, 1)); line-height: 1;
+  transform: translateY(160%);
+  transition: transform 0.7s cubic-bezier(.3,1.5,.5,1) calc(var(--i) * 0.15s + 0.5s);
+}
+/* çubuq */
+.puppet::after {
+  content: ''; position: absolute; left: 50%; top: 92%; translate: -50% 0;
+  width: 5px; height: 220px; border-radius: 3px; background: linear-gradient(#8a5a2b, #5e3b1a);
+}
+.stage[data-open='true'] .puppet {
+  transform: translateY(-4%);
+  animation: dance 1.8s ease-in-out calc(var(--i) * 0.2s + 1.3s) infinite;
+}
+/* danışan kukla */
+.stage[data-open='true'] .puppet.talk { animation: talk 0.42s ease-in-out infinite; z-index: 2; }
+/* klik edilən kukla hoppanır */
+.stage[data-open='true'] .puppet.hop { animation: hop 0.6s cubic-bezier(.3,1.6,.5,1) 1; }
+.puppet { cursor: pointer; }
+@keyframes talk {
+  0%, 100% { transform: translateY(-8%) scale(1.14) rotate(-6deg); }
+  50% { transform: translateY(-16%) scale(1.2) rotate(6deg); }
+}
+@keyframes hop {
+  40% { transform: translateY(-48%) scale(1.15) rotate(12deg); }
+  100% { transform: translateY(-4%); }
+}
+@keyframes dance {
+  0%, 100% { transform: translateY(-4%) rotate(-4deg); }
+  50% { transform: translateY(-12%) rotate(4deg); }
+}
+
+/* ===== PƏRDƏ ===== */
+.curtain {
+  position: absolute; top: 0; bottom: 0; z-index: 3; width: 52%;
+  background: repeating-linear-gradient(90deg, #b3121f 0 18px, #d4202f 18px 36px, #9d0f1b 36px 44px);
+  border-bottom: 10px solid #7e0c16; box-shadow: inset 0 -30px 40px #0003;
+  transition: transform 0.9s cubic-bezier(.6,.05,.2,1);
+}
+.l { left: 0; transform-origin: left center; }
+.r { right: 0; transform-origin: right center; }
+.stage[data-open='true'] .curtain { transform: scaleX(0.16); }
+
+/* yuxarıdakı dalğalı pərdəlik */
+.valance {
+  position: absolute; inset: 0 0 auto 0; z-index: 4; height: 40px; pointer-events: none;
+  background:
+    radial-gradient(circle 28px at 50% 0, #d4202f 97%, transparent 100%) 0 10px / 56px 30px repeat-x,
+    linear-gradient(#d4202f, #d4202f) 0 0 / 100% 12px no-repeat;
+  box-shadow: none;
+}
+
+
+/* ===== DEKORLAR ===== */
+.prop {
+  position: absolute; z-index: 1; line-height: 1; pointer-events: none; transform-origin: 50% 100%;
+  font-size: clamp(1.6rem, calc(var(--s) * 1.7vw), calc(var(--s) * 1rem));
+}
+@keyframes prop-sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+
+/* ===== PROJEKTORLAR ===== */
+.beam {
+  position: absolute; top: -4%; z-index: 2; width: 34%; height: 110%; opacity: 0; pointer-events: none; will-change: transform;
+  background: linear-gradient(180deg, #fff9c488, #fff9c400 85%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); transform-origin: 50% 0;
+  transition: opacity 1.2s ease 0.6s;
+}
+.b1 { left: 8%; animation: sweep 5s ease-in-out infinite alternate; }
+.b2 { right: 8%; animation: sweep 6s ease-in-out -2s infinite alternate-reverse; }
+.stage[data-open='true'] .beam { opacity: 0.55; }
+@keyframes sweep { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+
+/* ===== ALTYAZI BALONU ===== */
+.say {
+  position: absolute; top: 52px; left: 50%; z-index: 5; display: flex; align-items: center; gap: 10px; max-width: 84%;
+  padding: 8px 18px 8px 8px; border-radius: 26px; background: #fff; color: #2a1a0f;
+  font-size: clamp(0.8rem, 2.4vw, 1.08rem); font-weight: 700; line-height: 1.3; box-shadow: 0 6px 0 #0003;
+  translate: -50% 0; animation: say-pop 0.4s cubic-bezier(.3,1.6,.5,1);
+}
+.say::after {
+  content: ''; position: absolute; left: 50%; bottom: -9px; translate: -50% 0;
+  border: 10px solid transparent; border-bottom: 0; border-top-color: #fff;
+}
+.say i { display: grid; place-items: center; flex: none; width: 2.3em; height: 2.3em; border-radius: 50%; background: #ffe9a8; font-style: normal; font-size: 1.3em; }
+@keyframes say-pop { from { transform: translateY(14px) scale(0.7); opacity: 0; } }
+
+/* ===== RAMPA İŞIQLARI ===== */
+.foot {
+  position: absolute; left: 0; right: 0; bottom: 12%; z-index: 5; height: 10px; pointer-events: none;
+  background: radial-gradient(circle 7px, #fff3b0 35%, #ffd54a77 55%, transparent 72%) 0 50% / 26px 100% repeat-x;
+  animation: blink 1.6s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0.45; } }
+
+/* ===== TAMAŞAÇILAR ===== */
+.audience { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; display: flex; align-items: flex-end; height: 13%; pointer-events: none; }
+.audience i {
+  position: relative; flex: 1; height: calc(var(--h) * 1%); margin: 0 -1%; border-radius: 40% 40% 0 0; background: #150a26;
+}
+.audience i::before {
+  content: ''; position: absolute; left: 50%; top: -55%; translate: -50% 0; width: 78%; aspect-ratio: 1; border-radius: 50%; background: #150a26;
+}
+.audience[data-clap='true'] i { animation: cheer 0.45s ease-in-out calc(var(--i) * 0.06s) infinite alternate; }
+@keyframes cheer { to { transform: translateY(-22%); } }
+
+/* ===== ALQIŞ ===== */
+.clap { position: absolute; inset: 0; z-index: 7; display: grid; place-items: center; pointer-events: none; }
+.clap b {
+  padding: 8px 26px; border-radius: 999px; background: #fff; color: #c1121f; font: 700 clamp(1.1rem, 3.6vw, 1.8rem) var(--display);
+  box-shadow: 0 6px 0 #0003; animation: say-pop 0.5s cubic-bezier(.3,1.6,.5,1);
+}
+.clap span {
+  position: absolute; bottom: 8%; left: calc(8% + var(--i) * 13%); font-size: clamp(1.4rem, 4vw, 2.4rem);
+  animation: clap-up 2.2s ease-out calc(var(--i) * 0.18s) infinite;
+}
+@keyframes clap-up { from { transform: translateY(0) scale(0.6); opacity: 1; } to { transform: translateY(-190px) scale(1.2) rotate(14deg); opacity: 0; } }
+
+/* ===== DÜYMƏLƏR ===== */
+.ctrl { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; margin-top: 40px; }
+.tales { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.toggle, .tale {
+  min-height: 44px; padding: 6px 18px; border: 2px solid var(--heading); border-radius: 999px;
+  background: transparent; color: var(--heading); font: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.2s;
+}
+@media (hover: hover) { .toggle:hover, .tale:hover { transform: translateY(-2px); } }
+.toggle { border-color: var(--red); background: var(--red); color: #fff; }
+.tale[aria-pressed='true'] { background: var(--heading); color: var(--page); }
+
+.story { max-width: 560px; margin: 24px auto 0; text-align: center; }
+.story h3 { margin-bottom: 6px; font-size: 1.15rem; }
+
+@media (max-width: 800px) {
+  .lead { margin: -8px 0 24px; }
+  .stage { aspect-ratio: 4 / 3.3; border-width: 6px; border-top-width: 0; box-shadow: 0 10px 0 #4d2d10, 0 20px 28px #0003; }
+  .valance { height: 30px; background-size: 42px 22px, 100% 10px; background-position: 0 8px, 0 0; }
+  .puppets { gap: 6px; padding-bottom: 21%; }
+  .puppet { font-size: calc(clamp(2.9rem, 14.5vw, 4.4rem) * var(--sz, 1)); }
+  .puppet::after { width: 4px; }
+  .say { top: 36px; max-width: 90%; padding: 6px 14px 6px 6px; font-size: 0.82rem; }
+  .say i { font-size: 1.15em; }
+  .audience { height: 12%; }
+  .foot { bottom: 11%; }
+
+  /* düymələr: "Pərdəni aç" tam en, nağıllar 2 sütun */
+  .ctrl { flex-direction: column; align-items: stretch; gap: 12px; margin-top: 30px; }
+  .toggle { width: 100%; min-height: 48px; font-size: 1rem; }
+  .tales { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tale { min-height: 46px; padding: 6px 10px; font-size: 0.86rem; line-height: 1.2; }
+  .story { margin-top: 20px; padding: 16px 18px; border-radius: 20px; background: color-mix(in srgb, var(--heading) 7%, transparent); }
+  .story h3 { font-size: 1.05rem; }
+  .story p { font-size: 0.95rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .puppet, .curtain, .beam { transition: none; }
+  .stage[data-open='true'] .puppet, .stage[data-open='true'] .puppet.talk, .beam, .foot, .clap span, .audience[data-clap='true'] i { animation: none; }
+}
+
+/* ===== QIRMIZI PAPAQ ===== */
+.hat {
+  position: absolute; left: 50%; top: -3%; z-index: 1; width: 98%; height: 42%; translate: -50% 0; pointer-events: none;
+  border-radius: 55% 55% 20% 20% / 95% 95% 18% 18%;
+  background: radial-gradient(circle at 32% 28%, #ff5566, #d4202f 55%, #a30f1c);
+  box-shadow: inset -4px -5px 0 #0002, 0 2px 0 #7e0c16;
+}
+.hat::after {
+  content: ''; position: absolute; left: -4%; right: -4%; bottom: -10%; height: 26%;
+  border-radius: 999px; background: #b3121f; box-shadow: 0 2px 0 #7e0c16;
+}
+
+/* ===== QOĞAL (yumru çörək) ===== */
+.bun {
+  position: relative; display: block; width: 0.95em; height: 0.95em; border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #ffe59a, #eaa83c 62%, #c27a1c);
+  box-shadow: inset -0.05em -0.07em 0 #0002, 0 0.03em 0 #8a4f0e;
+}
+.bun::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle 0.065em at 33% 42%, #3a1f08 96%, transparent),
+    radial-gradient(circle 0.065em at 67% 42%, #3a1f08 96%, transparent),
+    radial-gradient(circle 0.1em at 20% 58%, #ff8a8a88 96%, transparent),
+    radial-gradient(circle 0.1em at 80% 58%, #ff8a8a88 96%, transparent);
+}
+.bun::after {
+  content: ''; position: absolute; left: 34%; top: 54%; width: 32%; height: 20%;
+  border-bottom: 0.05em solid #7a3a10; border-radius: 0 0 50% 50%;
+}

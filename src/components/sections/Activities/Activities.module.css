@@ -29,7 +29,7 @@
 }
 .zone:nth-child(odd)  { transform: rotate(-1.4deg); }
 .zone:nth-child(even) { transform: rotate(1.4deg); margin-top: 18px; }
-.zone:hover { transform: translateY(-8px) rotate(0); box-shadow: 0 16px 0 var(--c); }
+@media (hover: hover) { .zone:hover { transform: translateY(-8px) rotate(0); box-shadow: 0 16px 0 var(--c); } }
 .zone:active { transform: translateY(2px); box-shadow: 0 4px 0 var(--c); }
 
 .red   { --c: #f0344b; }
@@ -48,7 +48,7 @@
 .zone:nth-child(2) .ico { animation-delay: -0.7s; }
 .zone:nth-child(3) .ico { animation-delay: -1.4s; }
 .zone:nth-child(4) .ico { animation-delay: -2.1s; }
-.zone:hover .ico { animation: hop 0.5s ease-in-out infinite; }
+@media (hover: hover) { .zone:hover .ico { animation: hop 0.5s ease-in-out infinite; } }
 @keyframes bob { 50% { transform: translateY(-6px); } }
 @keyframes hop { 50% { transform: translateY(-12px) rotate(8deg); } }
 
@@ -77,8 +77,8 @@
   flex: none; width: calc(var(--s) * 1px); height: calc(var(--s) * 1px); margin: 0 -4px -10px; border-radius: 50%;
   background: radial-gradient(circle at 32% 28%, #fff9 0 12%, transparent 13%), var(--c);
   box-shadow: inset -4px -5px 0 #0002;
-  animation: bounce 2.2s ease-in-out var(--d) infinite;
 }
+.pit i:nth-child(3n+1) { animation: bounce 2.2s ease-in-out var(--d) infinite; }
 .pit i:nth-child(3n) { margin-bottom: 8px; }
 .pit i:nth-child(3n+1) { margin-bottom: -2px; }
 @keyframes bounce { 50% { transform: translateY(-8px); } }
@@ -86,7 +86,8 @@
 @media (max-width: 800px) {
   .zones { grid-template-columns: repeat(2, 1fr); gap: 52px 12px; }
   .zone { padding: 52px 12px 20px; border-radius: 26px; }
-  .zone:nth-child(even) { margin-top: 0; }
+  .zone:nth-child(odd), .zone:nth-child(even) { margin-top: 0; transform: none; }
+  .zone:active { transform: translateY(2px); }
   .ico { width: 68px; height: 68px; top: -36px; font-size: 2rem; }
   .zone h3 { font-size: 0.92rem; }
   .zone p { font-size: 0.85rem; }

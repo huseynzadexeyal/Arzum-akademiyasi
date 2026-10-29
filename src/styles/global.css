@@ -29,7 +29,7 @@
 *::after { box-sizing: border-box; }
 * { margin: 0; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
 body {
   font-family: var(--body);
@@ -40,15 +40,23 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3 { font-family: var(--display); line-height: 1.12; letter-spacing: -0.015em; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; }
+img, svg, video { max-width: 100%; }
 a { color: inherit; }
 button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
 @media (max-width: 800px) {
-  html { scroll-padding-top: 118px; }
-  body { padding-bottom: 76px; }
+  :root { --gutter: max(20px, 5vw); }
+  html { scroll-padding-top: 116px; }
+  body { font-size: 1rem; padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Ekranda görünməyən bölmələrdə animasiyalar dayanır (App.jsx), telefon boş yerə işləmir */
+[data-off],
+[data-off] *,
+[data-off] *::before,
+[data-off] *::after { animation-play-state: paused !important; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }

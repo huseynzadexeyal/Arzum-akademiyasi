@@ -6,11 +6,14 @@
   font: inherit; cursor: pointer;
 }
 .item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-.item:hover img { transform: scale(1.06); }
+@media (hover: hover) { .item:hover img { transform: scale(1.06); } }
+.emoji { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 14%; font-style: normal; font-size: clamp(3.4rem, 9vw, 5.4rem); }
 .item span {
-  position: relative; margin: 0 14px 16px; padding: 5px 16px;
-  border-radius: 999px; background: #fff; color: var(--navy); font-size: 0.92rem; font-weight: 700;
+  position: relative; display: flex; flex-direction: column; align-items: center; margin: 0 14px 16px; padding: 6px 18px;
+  border-radius: 22px; background: #fff; color: var(--navy); font-size: 0.92rem; font-weight: 700; line-height: 1.25;
 }
+.item small { font-size: 0.74rem; font-weight: 600; opacity: 0.7; }
+.lead { max-width: 640px; margin: -16px 0 28px; }
 
 /* dairə, yumru kvadrat, səkkizbucaqlı, yarpaq, altıbucaqlı, tərs yarpaq */
 .c0 { background: var(--blue);  border-radius: 50%; }
@@ -20,7 +23,16 @@
 .c4 { background: var(--blue);  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
 .c5 { background: var(--red);   border-radius: 0 50% 0 50%; }
 .c0 span, .c2 span, .c4 span { margin-bottom: 9%; }
-
-@media (max-width: 800px) { .gal { gap: 14px; } .item span { font-size: 0.85rem; } }
 .c3 span { margin-right: 24%; }
 .c5 span { margin-left: 24%; }
+
+@media (max-width: 800px) {
+  .lead { margin: -8px 0 22px; }
+  .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .item span { margin: 0 8px 10px; padding: 4px 10px; border-radius: 16px; font-size: 0.78rem; }
+  .item small { font-size: 0.68rem; }
+  .emoji { font-size: clamp(2.8rem, 15vw, 4rem); }
+  .c3 span { margin-right: 14%; }
+  .c5 span { margin-left: 14%; }
+}
+

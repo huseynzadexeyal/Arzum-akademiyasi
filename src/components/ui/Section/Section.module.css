@@ -4,12 +4,14 @@
   color: var(--fg, inherit);
 }
 
-.events  { --bg: #e8f4e0; }
+.staff   { --bg: #e8f4e0; }
+.theatre { --bg: #f1e9ff; }
 .gallery { --bg: #ffe6e9; }
 .find    { --bg: #d9f2fa; }
 .cta     { --bg: var(--red); --fg: #fff; --title: #fff; --bar: #fff; }
 
-:global([data-theme='dark']) .events  { --bg: #12241a; }
+:global([data-theme='dark']) .staff   { --bg: #12241a; }
+:global([data-theme='dark']) .theatre { --bg: #1b1530; }
 :global([data-theme='dark']) .gallery { --bg: #2b161b; }
 :global([data-theme='dark']) .find    { --bg: #0e2636; }
 :global([data-theme='dark']) .cta     { --bg: #7d1623; }

@@ -46,12 +46,17 @@
     radial-gradient(2px 2px at 9% 58%, #fff, #0000), radial-gradient(2px 2px at 27% 66%, #fff, #0000),
     radial-gradient(2px 2px at 49% 70%, #fff, #0000), radial-gradient(2px 2px at 67% 62%, #fff, #0000),
     radial-gradient(2px 2px at 88% 54%, #fff, #0000), radial-gradient(2px 2px at 96% 74%, #fff, #0000);
-  animation: twinkle 4s ease-in-out infinite alternate;
+  will-change: opacity; animation: twinkle 4s ease-in-out infinite alternate;
 }
 @keyframes twinkle { from { opacity: 0.3; } to { opacity: 1; } }
 
 @media (max-width: 800px) {
-  .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 5vh; padding-bottom: 12vh; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 22px; padding-bottom: 12vh; }
+  /* kicker günəşin/ayın yanında qalır, başlıq onun altından başlayır */
+  .kicker { min-height: 70px; margin-bottom: 4px; padding-right: 100px; font-size: 0.95rem; }
+  .title { margin-bottom: 16px; font-size: clamp(1.85rem, 8.4vw, 2.5rem); line-height: 1.14; }
+  .cta { display: grid; gap: 10px; margin-top: 6px; }
+  .cta > a { width: 100%; margin: 0; min-height: 52px; }
   .hero { background-size: auto 20%, 100% 11%, 100% 36%, 100% 32%, 100% 28%, auto, auto, auto; }
   /* mobil: bulud piksel ölçülü (hündür bölmədə dağılmasın) */
   .hero {

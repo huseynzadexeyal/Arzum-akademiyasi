@@ -15,12 +15,9 @@ export default function Sun() {
 
   return (
     <div className={styles.wrap} aria-hidden="true">
-      <svg
-        key={joy}
-        className={`${styles.sun} ${joy ? styles.joy : ''}`}
-        viewBox="-170 -170 340 340"
-        onClick={onClick}
-      >
+      <div key={joy} className={`${styles.sun} ${joy ? styles.joy : ''}`} onClick={onClick}>
+      {/* 1-ci qat: parıltı + ləçəklər (yalnız bu qat dönür, brauzer GPU ilə edir) */}
+      <svg className={styles.rays} viewBox="-170 -170 340 340">
         <defs>
           <radialGradient id="sunFace" cx="38%" cy="30%" r="78%">
             <stop offset="0" stopColor="#fff2a0" />
@@ -46,14 +43,12 @@ export default function Sun() {
           <clipPath id="mouthClip"><path d="M-24 26 Q0 66 24 26 Q0 33 -24 26 Z" /></clipPath>
         </defs>
 
-        <circle className={styles.glow} r="165" fill="url(#sunGlow)" />
+        <circle r="165" fill="url(#sunGlow)" />
 
-        <g className={styles.rays}>
+        <g>
           {Array.from({ length: PETALS }, (_, i) => (
             <g key={i} transform={`rotate(${(360 / PETALS) * i})`}>
               <path
-                className={styles.petal}
-                style={{ animationDelay: `${(i * 0.2).toFixed(1)}s` }}
                 d={i % 2 ? SHORT : LONG}
                 fill="url(#sunPetal)"
                 stroke="#f58f12"
@@ -63,7 +58,10 @@ export default function Sun() {
             </g>
           ))}
         </g>
+      </svg>
 
+      {/* 2-ci qat: üz (yalnız göz qırpması burada) */}
+      <svg className={styles.faceSvg} viewBox="-170 -170 340 340">
         <g className={styles.face}>
           <circle r="86" fill="url(#sunFace)" stroke="#f59a14" strokeWidth="3" />
           {/* parıltı */}
@@ -94,6 +92,7 @@ export default function Sun() {
           </g>
         </g>
       </svg>
+      </div>
     </div>
   )
 }

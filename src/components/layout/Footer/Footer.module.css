@@ -2,4 +2,5 @@
   padding: 36px var(--gutter); background: var(--navy); color: #cfe0ea; text-align: center;
   content-visibility: auto; contain-intrinsic-size: auto 160px;
 }
+@media (max-width: 800px) { .foot { padding: 28px var(--gutter) 32px; font-size: 0.95rem; } }
 .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 6px; }

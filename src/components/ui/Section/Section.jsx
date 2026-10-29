@@ -1,7 +1,7 @@
 import { cx } from '@/utils/cx'
 import styles from './Section.module.css'
 
-// tone: act | events | gallery | find | cta — fon rəngi
+// tone: staff | theatre | gallery | find | cta — fon rəngi
 export function SectionTitle({ children }) {
   return <h2 className={styles.title}>{children}</h2>
 }

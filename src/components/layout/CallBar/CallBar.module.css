@@ -1,12 +1,58 @@
-.callbar { display: none; }
+.bar { display: none; }
 
 @media (max-width: 800px) {
-  .callbar {
-    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-    justify-content: center; align-items: center; gap: 10px;
-    min-height: 56px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-    background: var(--red); color: #fff;
-    font: 700 1.2rem var(--display); text-decoration: none;
-    box-shadow: 0 -4px 0 #a31620;
+  .bar {
+    position: fixed; z-index: 30; display: flex; align-items: center; gap: 8px; overflow: hidden;
+    left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px));
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    padding: 9px 9px 9px 9px; border-radius: 24px;
+    background: var(--page);
+    box-shadow: 0 12px 32px #0a254038, 0 0 0 1px var(--line);
+    animation: rise 0.7s cubic-bezier(.2, .9, .3, 1.1) 0.8s both;
   }
+  /* kartın yuxarı kənarında bayraq xətti */
+  .bar::before {
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue) 33%, var(--red) 33% 66%, var(--green) 66%);
+  }
+
+  /* 3 sütun: ikon | nömrə (ortada) | WhatsApp üçün boş yer, beləcə nömrə kartın tam ortasında durur */
+  .call {
+    flex: 1; min-width: 0; display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 8px;
+    padding: 0; color: var(--heading); text-decoration: none; border-radius: 18px;
+  }
+  .call:active { opacity: 0.85; }
+
+  .ico {
+    position: relative; flex: none; display: grid; place-items: center; width: 48px; height: 48px;
+    border-radius: 50%; background: linear-gradient(145deg, #f0485c, var(--red)); color: #fff;
+    box-shadow: 0 6px 14px #dc2a3e55;
+  }
+  .ico::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--red);
+    animation: ring 2.6s ease-out 1.6s infinite;
+  }
+  .ico svg { animation: ring-shake 2.6s ease-in-out 1.6s infinite; transform-origin: center; }
+
+  .txt { display: flex; flex-direction: column; align-items: center; min-width: 0; text-align: center; line-height: 1.15; }
+  .txt small { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.02em; opacity: 0.7; }
+  .txt b { font: 700 1.2rem var(--display); letter-spacing: -0.01em; white-space: nowrap; }
+
+  .wa {
+    position: absolute; right: 9px; top: 50%; translate: 0 -50%;
+    flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px;
+    background: #25d366; color: #fff; text-decoration: none; box-shadow: 0 6px 14px #25d36655;
+  }
+  .wa:active { transform: scale(0.95); }
+}
+
+@keyframes rise { from { transform: translateY(120%); opacity: 0; } }
+@keyframes ring { from { transform: scale(1); opacity: 0.55; } to { transform: scale(1.7); opacity: 0; } }
+@keyframes ring-shake {
+  0%, 12%, 100% { transform: rotate(0); }
+  3%, 9% { transform: rotate(-14deg); }
+  6% { transform: rotate(14deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar, .ico::after, .ico svg { animation: none; }
 }
