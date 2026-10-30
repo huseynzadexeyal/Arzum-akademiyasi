@@ -5,13 +5,14 @@ import Button from '@/components/ui/Button'
 import Lead from '@/components/ui/Lead'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import styles from './Find.module.css'
+import { SECTION } from '@/data/nav'
 
 export default function Find() {
   const { t } = useApp()
   const [showMap, setShowMap] = useState(false)
   const q = encodeURIComponent(contact.mapQuery)
   return (
-    <Section id="xerite" tone="find" className={styles.find}>
+    <Section id={SECTION.find} tone="find" className={styles.find}>
       <SectionTitle>{t.findH}</SectionTitle>
       <Lead>{t.addr}</Lead>
       <div className={styles.map}>

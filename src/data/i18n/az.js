@@ -1,9 +1,11 @@
 const az = {
-  title: 'Arzum Akademiya | Uşaq İnkişaf Akademiyası, Binəqədi', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
+  title: 'Şəhid Vüsal Məmmədov adına Bağça və İnkişaf Mərkəzi, Binəqədi | Arzum Akademiya',
+  desc: 'Arzum Akademiya Binəqədi, Bakıda Şəhid Vüsal Məmmədov adına bağça və inkişaf mərkəzidir: məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar, kukla teatrı. Qeydiyyat: 051 429 65 63.', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
   nav: { act: 'Fəaliyyət', thr: 'Teatr', staff: 'Kollektiv', mem: 'Yaddaş', gal: 'Qalereya', enr: 'Qeydiyyat' },
+  skip: 'Əsas məzmuna keç',
   callNow: 'Zəng edin', waLabel: 'WhatsApp-da yazın',
   modes: { auto: 'Avtomatik: gün batanda qaranlıq olur', light: 'İşıqlı', dark: 'Qaranlıq' },
-  kicker: 'Binəqədi, Bakı', h1: 'Uşaqları ailədən məktəbə aparan yol',
+  kicker: 'Şəhid Vüsal Məmmədov adına bağça və inkişaf mərkəzi, Binəqədi', h1: 'Uşaqları ailədən məktəbə aparan yol',
   lead: 'Şəhid Vüsal Məmmədov adına Uşaq İnkişaf Akademiyası. Burada hər uşaq oynayır, yaradır və böyüyür.',
   cta1: 'Qeydiyyatdan keç', cta2: 'Nələr edirik', road: ['Ailə', 'Akademiya', 'Məktəb'],
   actH: 'Gün boyu nə baş verir',
@@ -26,7 +28,7 @@ const az = {
   mrlMedalsH: 'Təltifləri',
   mrlMedals: ['«Vətən uğrunda» medalı', '«Cəsur döyüşçü» medalı', '«Suqovuşanın azad edilməsinə görə» medalı'],
   memH: 'Qan yaddaşımız', memLead: 'Vətən sevgisi şəhidlərimizin xatirəsindən başlayır. Kiçik yaşdan öyrədirik: tarixini bil, şəhidinə ehtiram göstər, torpağını sev.',
-  mdays: [['20 Yanvar', 'Qanlı Yanvar', '1990-cı ildə Bakıda günahsız insanların həlak olduğu faciənin xatirəsi.'], ['26 Fevral', 'Xocalı soyqırımı', '1992-ci ildə Xocalıda dinc əhalinin qətlə yetirildiyi faciənin xatirəsi.'], ['27 Sentyabr', 'Anım Günü', 'Vətən müharibəsində torpaqlarımızın azadlığı uğrunda canını fəda edən şəhidlərimizin günü.']],
+  mdays: [['20 Yanvar', 'Qanlı Yanvar', '1990-cı ildə Bakıda günahsız insanların həlak olduğu faciənin xatirəsi.'], ['26 Fevral', 'Xocalı soyqırımı', '1992-ci ildə Xocalıda dinc əhalinin qətlə yetirildiyi faciənin xatirəsi.'], ['31 Mart', 'Azərbaycanlıların Soyqırımı Günü', '1918-ci ildə dinc azərbaycanlılara qarşı törədilən kütləvi qırğınların xatirəsi. 1998-ci ildə Heydər Əliyevin fərmanı ilə bu gün anım günü elan olunub.'], ['27 Sentyabr', 'Anım Günü', 'Vətən müharibəsində torpaqlarımızın azadlığı uğrunda canını fəda edən şəhidlərimizin günü.']],
   carn: 'Qərənfil qoy', carnOk: 'Əziz xatirələrinə ehtiram.',
   galH: 'Qalereya', galLead: 'Bayramlardan şəkillər və videolar. Açmaq üçün üzərinə basın.', galSoon: 'Tezliklə', galEmpty: 'Şəkil və videolar tezliklə əlavə olunacaq.',
   albums: [['Yeni il', '1 Yanvar · Yeni il bayramı'], ['8 Mart', '8 Mart · Qadınlar günü'], ['Ramazan bayramı', 'Ramazan bayramı'], ['Novruz', '20 Mart · Novruz bayramı'], ['1 İyun', '1 İyun · Uşaqların Beynəlxalq Müdafiəsi günü'], ['Payız bayramı', 'Payız bayramı'], ['Zəfər Günü', '8 Noyabr · Zəfər Günü'], ['Ad günləri', 'Ad günləri'], ['Kukla teatrı', 'Kukla teatrı tamaşaları']], galMore: 'Daha çox Instagram-da',
@@ -35,7 +37,7 @@ const az = {
   e: ['Valideynin adını yazın.', 'Düzgün nömrə yazın, məsələn: 051 123 45 67.', 'Uşağın yaşı 1 ilə 7 arasında olmalıdır.'],
   ok: 'Mesaj hazırdır. WhatsApp-da göndərin, tezliklə cavab verəcəyik.',
   showMap: 'Xəritəni göstər',
-  findH: 'Bizi tapın', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
+  findH: 'Bizi Binəqədidə tapın', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
 }
 
 export default az

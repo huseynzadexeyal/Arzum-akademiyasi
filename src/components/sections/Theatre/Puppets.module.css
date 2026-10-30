@@ -1,0 +1,55 @@
+/* Personajlar */
+.svg { display: block; width: 1.45em; height: auto; overflow: visible; filter: drop-shadow(0 6px 0 #0002); }
+.head { display: block; width: 100%; height: 100%; }
+
+/* Gözlər qırpılır */
+.eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.4s infinite; }
+.wolf .eyes { animation-delay: -1.3s; }
+.granny .eyes { animation-delay: -2.6s; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96.5% { transform: scaleY(0.08); } }
+
+/* Bəbəklər kursoru izləyir (Theatre.jsx --lx / --ly yazır) */
+.pupil { transform: translate(calc(var(--lx, 0) * 3.4px), calc(var(--ly, 0) * 2.6px)); transition: transform 0.14s ease-out; }
+
+/* Ağız: danışanda açılıb-bağlanır */
+.mouth { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0.8); }
+[data-talk='true'] .mouth { animation: yap 0.26s ease-in-out infinite alternate; }
+@keyframes yap { from { transform: scaleY(0.4); } to { transform: scaleY(1.2); } }
+
+/* Qırmızı papaq əl yelləyir */
+.wave { transform-origin: 148px 188px; animation: wave 1.1s ease-in-out infinite alternate; }
+@keyframes wave { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+
+/* Canavar quyruq bulayır, qulaq tərpədir */
+.tail { transform-origin: 148px 222px; animation: wag 0.55s ease-in-out infinite alternate; }
+@keyframes wag { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+.earL { transform-origin: 62px 74px; animation: twitch 5.2s infinite; }
+.earR { transform-origin: 138px 74px; animation: twitch 5.2s -2.4s infinite reverse; }
+@keyframes twitch { 0%, 88%, 100% { transform: rotate(0); } 91% { transform: rotate(-9deg); } 95% { transform: rotate(4deg); } }
+
+/* Əsa və üzüm qabı yüngül yellənir */
+.cane { transform-origin: 150px 154px; animation: sway 2.4s ease-in-out infinite alternate; }
+.bowl { transform-origin: 100px 240px; animation: sway 2s ease-in-out infinite alternate; }
+.club { transform-origin: 178px 250px; animation: sway 1.6s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+
+/* Pəri qanadları çırpılır, parıltılar yanıb-sönür */
+.wingL { transform-origin: 84px 170px; animation: flap 0.5s ease-in-out infinite alternate; }
+.wingR { transform-origin: 116px 170px; animation: flap 0.5s ease-in-out infinite alternate-reverse; }
+@keyframes flap { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+.spark { animation: twinkle 1.3s ease-in-out infinite alternate; }
+@keyframes twinkle { from { opacity: 0.25; } to { opacity: 1; } }
+
+/* Dekor */
+.scenery { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cloud { animation: drift 26s ease-in-out infinite alternate; }
+.c2 { animation-duration: 34s; animation-delay: -9s; }
+@keyframes drift { from { transform: translateX(-5px); } to { transform: translateX(7px); } }
+
+@media (max-width: 800px) {
+  .svg { width: 1.5em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyes, .wave, .tail, .earL, .earR, .cane, .bowl, .club, .wingL, .wingR, .spark, .cloud, [data-talk='true'] .mouth { animation: none; }
+  .pupil { transition: none; transform: none; }
+}

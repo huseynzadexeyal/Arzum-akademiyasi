@@ -1,0 +1,6 @@
+.skip {
+  position: fixed; top: 8px; left: 8px; z-index: 100; padding: 10px 18px; border-radius: 999px;
+  background: var(--heading); color: var(--page); font-weight: 700; text-decoration: none;
+  transform: translateY(-200%); transition: transform 0.2s;
+}
+.skip:focus { transform: none; }

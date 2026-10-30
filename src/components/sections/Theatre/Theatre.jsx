@@ -2,29 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useApp } from '@/context/AppContext'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import { fireConfetti } from '@/components/ui/Confetti'
+import { PUPPETS, PROPS, face } from '@/data/theatre'
+import { Puppet, RedHoodScene, CirtdanScene, QogalScene, TiqScene, RaceScene, BallScene } from './Puppets'
+
+// Hər nağılın SVG dekoru (sıra t.thTales ilə eynidir)
+const SCENES = [RedHoodScene, CirtdanScene, QogalScene, TiqScene, RaceScene, BallScene]
+import { SECTION } from '@/data/nav'
+import { useInViewOnce } from '@/hooks/useInViewOnce'
 import styles from './Theatre.module.css'
-
-// Hər nağılın kuklaları (sıra i18n-dəki dialoqdakı nömrələrə uyğundur)
-// e: emoji, hat: qırmızı papaq, bun: Qoğal, size: ölçü (1 = normal)
-const PUPPETS = [
-  [{ e: '👧', hat: true }, { e: '🐺' }, { e: '👵' }],         // Qırmızı papaq
-  [{ e: '🧒', size: 0.62 }, { e: '👴' }, { e: '👹' }],       // Cırtdan
-  [{ bun: true }, { e: '🐰' }, { e: '🐺' }, { e: '🦊' }],    // Qoğal
-  [{ e: '🪳' }, { e: '🐭' }, { e: '🐸' }, { e: '🐱' }],      // Tıq-tıq xanım
-  [{ e: '🐢' }, { e: '🐰' }],                                 // Tısbağa və dovşan
-  [{ e: '👸' }, { e: '🤴' }, { e: '🧚' }],                    // Zoluşka
-]
-const face = (p) => (p.bun ? '🥯' : p.e)
-
-// Dekorlar: [emoji, soldan %, aşağıdan %, ölçü(rem)]
-const PROPS = [
-  [['🌲', 4, 18, 3.2], ['🌲', 15, 14, 2.4], ['🏡', 84, 16, 3.6], ['🌲', 93, 12, 2.6]],
-  [['⛰️', 6, 17, 3.8], ['🌳', 20, 12, 2.4], ['🏡', 86, 15, 3.2], ['🌾', 77, 11, 2]],
-  [['🌾', 5, 16, 2.8], ['🌼', 17, 12, 1.8], ['🌼', 79, 11, 1.8], ['🌳', 91, 15, 3.2]],
-  [['🏠', 6, 16, 3.4], ['🌸', 19, 12, 2], ['🌷', 79, 12, 2], ['🌻', 92, 14, 3]],
-  [['🌷', 6, 14, 2.2], ['🌳', 13, 17, 3], ['🌷', 77, 11, 2], ['🏁', 90, 16, 3.4]],
-  [['🏰', 85, 20, 4.2], ['⭐', 10, 58, 1.6], ['✨', 32, 66, 1.4], ['🌟', 70, 72, 1.8]],
-]
 
 const AUDIENCE = Array.from({ length: 18 }, (_, i) => 34 + ((i * 17) % 30))
 
@@ -42,18 +27,8 @@ export default function Theatre() {
   const timer = useRef(0)
 
   // Səhnə ekrana çıxanda pərdə özü açılır
-  useEffect(() => {
-    const el = stageRef.current
-    if (!el || !('IntersectionObserver' in window)) return undefined
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        io.disconnect()
-        timer.current = setTimeout(() => setOpen(true), 500)
-      }
-    }, { threshold: 0.6 })
-    io.observe(el)
-    return () => { io.disconnect(); clearTimeout(timer.current) }
-  }, [])
+  useInViewOnce(stageRef, () => { timer.current = setTimeout(() => setOpen(true), 500) }, 0.6)
+  useEffect(() => () => clearTimeout(timer.current), [])
 
   // Tamaşa ssenarisi: pərdə açılandan sonra replikalar ardıcıl səslənir, axırda alqış
   useEffect(() => {
@@ -83,6 +58,20 @@ export default function Theatre() {
     }, 650)
   }
 
+  // Bəbəklər kursoru izləyir: re-render olmadan CSS dəyişənləri yazılır
+  const look = (e) => {
+    const el = stageRef.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const c = (v) => Math.max(-1, Math.min(1, v)).toFixed(2)
+    el.style.setProperty('--lx', c(((e.clientX - r.left) / r.width) * 2 - 1))
+    el.style.setProperty('--ly', c(((e.clientY - r.top) / r.height) * 2 - 1))
+  }
+  const lookAway = () => {
+    stageRef.current?.style.setProperty('--lx', '0')
+    stageRef.current?.style.setProperty('--ly', '0')
+  }
+
   const toggle = (e) => {
     if (clap) { setRun((n) => n + 1); return }
     if (!open) fireConfetti(e)
@@ -101,7 +90,7 @@ export default function Theatre() {
   const who = line ? line[0] : -1
 
   return (
-    <Section id="teatr" tone="theatre">
+    <Section id={SECTION.theatre} tone="theatre">
       <SectionTitle>{t.thH}</SectionTitle>
       <p className={styles.lead}>{t.thLead}</p>
 
@@ -111,8 +100,11 @@ export default function Theatre() {
         data-open={open}
         data-scene={tale}
         onClick={() => { if (!open) setOpen(true) }}
+        onPointerMove={look}
+        onPointerLeave={lookAway}
       >
         <div className={styles.scene}>
+          {(() => { const Scene = SCENES[tale]; return Scene ? <Scene /> : null })()}
           {PROPS[tale].map(([emoji, l, b, s], i) => (
             <span key={`p${tale}-${i}`} className={styles.prop} aria-hidden="true" style={{ left: `${l}%`, bottom: `${b}%`, '--s': s, '--d': `${i * 0.7}s` }}>{emoji}</span>
           ))}
@@ -121,13 +113,12 @@ export default function Theatre() {
               <span
                 key={i}
                 className={`${styles.puppet} ${who === i ? styles.talk : ''} ${poke === i ? styles.hop : ''}`}
-                style={{ '--i': i, '--sz': p.size || 1 }}
+                style={{ '--i': i, '--sz': p.size || 1, order: p.o ?? i }}
                 aria-hidden="true"
                 onClick={poked(i)}
                 onAnimationEnd={() => setPoke(null)}
               >
-                {p.bun ? <b className={styles.bun} /> : p.e}
-                {p.hat && <b className={styles.hat} />}
+                {p.k ? <Puppet kind={p.k} talking={who === i} /> : p.bun ? <b className={styles.bun} /> : p.e}
               </span>
             ))}
           </div>
@@ -141,7 +132,7 @@ export default function Theatre() {
 
         {line && (
           <div className={styles.say} key={step} aria-hidden="true">
-            <i>{face(PUPPETS[tale][who])}</i>
+            <i>{PUPPETS[tale][who].k ? <Puppet kind={PUPPETS[tale][who].k} head /> : face(PUPPETS[tale][who])}</i>
             <span>{line[1]}</span>
           </div>
         )}

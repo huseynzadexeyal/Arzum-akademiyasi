@@ -3,4 +3,5 @@
   content-visibility: auto; contain-intrinsic-size: auto 160px;
 }
 @media (max-width: 800px) { .foot { padding: 28px var(--gutter) 32px; font-size: 0.95rem; } }
+.addr { font-style: normal; }
 .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 6px; }

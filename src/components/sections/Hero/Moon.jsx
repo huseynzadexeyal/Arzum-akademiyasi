@@ -45,7 +45,7 @@ export default function Moon() {
           </mask>
         </defs>
 
-        <circle className={styles.glow} r="165" fill="url(#moonGlow)" />
+        <circle r="165" fill="url(#moonGlow)" />
 
         {/* ətrafda yanıb-sönən ulduzlar */}
         {STARS.map(([x, y, s, d], i) => (
@@ -61,7 +61,7 @@ export default function Moon() {
           <text className={styles.z3} x="82" y="-116" fontSize="15">z</text>
         </g>
 
-        <g className={styles.face}>
+        <g>
           <g mask="url(#moonCut)">
             <circle r="84" fill="url(#moonFace)" stroke="#e7bd4f" strokeWidth="4" />
             {/* kraterlər */}

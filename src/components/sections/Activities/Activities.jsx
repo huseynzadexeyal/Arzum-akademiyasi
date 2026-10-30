@@ -1,16 +1,15 @@
 import { useApp } from '@/context/AppContext'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import { fireConfetti } from '@/components/ui/Confetti'
+import { ICONS, BALLS } from '@/data/activities'
+import { SECTION } from '@/data/nav'
 import styles from './Activities.module.css'
-
-const ICONS = [['👩‍🍳', 'red'], ['🎨', 'green'], ['💃', 'blue'], ['📚', 'sun']]
-const BALLS = ['#f0344b', '#ffc83d', '#00b5e2', '#3fae2a', '#ff8fc0', '#7b5cff']
 
 // Uşaq əyləncə mərkəzi: hər fəaliyyət öz rəngli "zonası" ilə.
 export default function Activities() {
   const { t } = useApp()
   return (
-    <Section id="fealiyyet" tone="act" className={styles.hall}>
+    <Section id={SECTION.activities} tone="act" className={styles.hall}>
       <i className={`${styles.balloon} ${styles.bl1}`} aria-hidden="true" />
       <i className={`${styles.balloon} ${styles.bl2}`} aria-hidden="true" />
       <i className={`${styles.balloon} ${styles.bl3}`} aria-hidden="true" />

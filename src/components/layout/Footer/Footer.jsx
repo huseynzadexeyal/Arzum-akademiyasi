@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className={styles.foot}>
       <p>{t.center}</p>
-      <p>{t.addr}</p>
+      <address className={styles.addr}>{t.addr}, Bakı</address>
       <p className={styles.links}>
         <a href={telHref}>{contact.phone}</a>
         <a href={contact.instagram} target="_blank" rel="noreferrer">Instagram</a>

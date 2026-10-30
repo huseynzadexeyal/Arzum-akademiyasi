@@ -8,11 +8,12 @@ import Road from './Road'
 import Sun from './Sun'
 import Moon from './Moon'
 import styles from './Hero.module.css'
+import { SECTION } from '@/data/nav'
 
 export default function Hero() {
   const { t } = useApp()
   return (
-    <section id="top" className={styles.hero}>
+    <section id={SECTION.top} className={styles.hero}>
       <Sun />
       <Moon />
       <Badge />
@@ -33,8 +34,8 @@ export default function Hero() {
         </h1>
         <Lead>{t.lead}</Lead>
         <div className={styles.cta}>
-          <Button href="#qeydiyyat" onClick={fireConfetti}>{t.cta1}</Button>
-          <Button href="#fealiyyet" variant="ghost">{t.cta2}</Button>
+          <Button href={`#${SECTION.enroll}`} onClick={fireConfetti}>{t.cta1}</Button>
+          <Button href={`#${SECTION.activities}`} variant="ghost">{t.cta2}</Button>
         </div>
       </div>
       <Road />

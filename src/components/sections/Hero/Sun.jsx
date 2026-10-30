@@ -61,8 +61,8 @@ export default function Sun() {
       </svg>
 
       {/* 2-ci qat: üz (yalnız göz qırpması burada) */}
-      <svg className={styles.faceSvg} viewBox="-170 -170 340 340">
-        <g className={styles.face}>
+      <svg viewBox="-170 -170 340 340">
+        <g>
           <circle r="86" fill="url(#sunFace)" stroke="#f59a14" strokeWidth="3" />
           {/* parıltı */}
           <ellipse cx="-34" cy="-56" rx="30" ry="14" fill="#fff" opacity="0.3" transform="rotate(-28 -34 -56)" />

@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import Lightbox from './Lightbox'
 import styles from './Gallery.module.css'
+import { SECTION } from '@/data/nav'
 
 const countText = (items, soon) => {
   const p = items.filter((x) => x.type === 'photo').length
@@ -23,7 +24,7 @@ export default function Gallery() {
   const album = open ? ALBUMS[open.a] : null
 
   return (
-    <Section id="qalereya" tone="gallery">
+    <Section id={SECTION.gallery} tone="gallery">
       <SectionTitle>{t.galH}</SectionTitle>
       <p className={styles.lead}>{t.galLead}</p>
       <div className={styles.gal}>

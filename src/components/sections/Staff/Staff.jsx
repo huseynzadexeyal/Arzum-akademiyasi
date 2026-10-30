@@ -4,6 +4,7 @@ import { hideOnError } from '@/utils/dom'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import { fireConfetti } from '@/components/ui/Confetti'
 import styles from './Staff.module.css'
+import { SECTION } from '@/data/nav'
 
 const COLORS = ['red', 'blue', 'green', 'sun']
 
@@ -11,7 +12,7 @@ const COLORS = ['red', 'blue', 'green', 'sun']
 export default function Staff() {
   const { t, lang } = useApp()
   return (
-    <Section id="kollektiv" tone="staff">
+    <Section id={SECTION.staff} tone="staff">
       <SectionTitle>{t.stH}</SectionTitle>
       <p className={styles.lead}>{t.stLead}</p>
       <ul className={styles.grid}>

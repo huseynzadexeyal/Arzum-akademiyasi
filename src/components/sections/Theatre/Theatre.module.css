@@ -9,7 +9,7 @@
   background: #2a1a0f; box-shadow: 0 14px 0 #4d2d10, 0 28px 40px #0003; cursor: pointer;
 }
 .stage[data-scene='1'] { --sky1: #ffb36b; --sky2: #ffe3b8; --hill: #5a9c3a; --hill2: #7bb648; }
-.stage[data-scene='2'] { --sky1: #ffd48a; --sky2: #fff1cf; --hill: #8fbf45; --hill2: #b0d45a; }
+.stage[data-scene='2'] { --sky1: #5fb8f5; --sky2: #dff3ff; --hill: #6fbd44; --hill2: #86cf55; }
 .stage[data-scene='3'] { --sky1: #ffc2d9; --sky2: #fff0f5; --hill: #6bb36b; --hill2: #8fcf7a; }
 .stage[data-scene='4'] { --sky1: #9be0ff; --sky2: #fff3b0; --hill: #78b83c; --hill2: #9bcf4f; }
 .stage[data-scene='5'] { --sky1: #2a1b5c; --sky2: #7a4fb5; --hill: #3b2a73; --hill2: #4b3590; --orb: #f4f1d0; }
@@ -26,6 +26,9 @@
   content: ''; position: absolute; top: 12%; right: 12%; width: 11%; aspect-ratio: 1; border-radius: 50%;
   background: var(--orb); box-shadow: 0 0 30px #fff8;
 }
+/* Qırmızı papaq afişasında günəş yoxdur, bulud var */
+.stage[data-scene='0'] .scene::after,
+.stage[data-scene='2'] .scene::after { display: none; }
 /* gecə nağılında ulduzlar */
 .stage[data-scene='5'] .scene::before {
   content: ''; position: absolute; inset: 0;
@@ -87,6 +90,7 @@
 .valance {
   position: absolute; inset: 0 0 auto 0; z-index: 4; height: 40px; pointer-events: none;
   background:
+    radial-gradient(circle 3.5px, #fff3a8 40%, #ffd54acc 70%, transparent 100%) 0 5px / 28px 12px repeat-x,
     radial-gradient(circle 28px at 50% 0, #d4202f 97%, transparent 100%) 0 10px / 56px 30px repeat-x,
     linear-gradient(#d4202f, #d4202f) 0 0 / 100% 12px no-repeat;
   box-shadow: none;
@@ -123,7 +127,7 @@
   content: ''; position: absolute; left: 50%; bottom: -9px; translate: -50% 0;
   border: 10px solid transparent; border-bottom: 0; border-top-color: #fff;
 }
-.say i { display: grid; place-items: center; flex: none; width: 2.3em; height: 2.3em; border-radius: 50%; background: #ffe9a8; font-style: normal; font-size: 1.3em; }
+.say i { overflow: hidden; display: grid; place-items: center; flex: none; width: 2.3em; height: 2.3em; border-radius: 50%; background: #ffe9a8; font-style: normal; font-size: 1.3em; }
 @keyframes say-pop { from { transform: translateY(14px) scale(0.7); opacity: 0; } }
 
 /* ===== RAMPA İŞIQLARI ===== */
@@ -175,12 +179,15 @@
 @media (max-width: 800px) {
   .lead { margin: -8px 0 24px; }
   .stage { aspect-ratio: 4 / 3.3; border-width: 6px; border-top-width: 0; box-shadow: 0 10px 0 #4d2d10, 0 20px 28px #0003; }
-  .valance { height: 30px; background-size: 42px 22px, 100% 10px; background-position: 0 8px, 0 0; }
+  .valance { height: 30px; background-size: 24px 10px, 42px 22px, 100% 10px; background-position: 0 4px, 0 8px, 0 0; }
   .puppets { gap: 6px; padding-bottom: 21%; }
   .puppet { font-size: calc(clamp(2.9rem, 14.5vw, 4.4rem) * var(--sz, 1)); }
   .puppet::after { width: 4px; }
-  .say { top: 36px; max-width: 90%; padding: 6px 14px 6px 6px; font-size: 0.82rem; }
-  .say i { font-size: 1.15em; }
+  /* 4 kuklalı nağıllar (Qoğal, Tıq-tıq xanım) kiçik ekrana sığsın */
+  .stage[data-scene='2'] .puppets, .stage[data-scene='3'] .puppets { gap: 0; }
+  .stage[data-scene='2'] .puppet, .stage[data-scene='3'] .puppet { font-size: calc(clamp(2.1rem, 10.5vw, 3.2rem) * var(--sz, 1)); }
+  .say { top: 32px; max-width: 94%; gap: 8px; padding: 5px 12px 5px 5px; font-size: 0.74rem; line-height: 1.25; }
+  .say i { font-size: 1.05em; }
   .audience { height: 12%; }
   .foot { bottom: 11%; }
 
@@ -196,18 +203,6 @@
 @media (prefers-reduced-motion: reduce) {
   .puppet, .curtain, .beam { transition: none; }
   .stage[data-open='true'] .puppet, .stage[data-open='true'] .puppet.talk, .beam, .foot, .clap span, .audience[data-clap='true'] i { animation: none; }
-}
-
-/* ===== QIRMIZI PAPAQ ===== */
-.hat {
-  position: absolute; left: 50%; top: -3%; z-index: 1; width: 98%; height: 42%; translate: -50% 0; pointer-events: none;
-  border-radius: 55% 55% 20% 20% / 95% 95% 18% 18%;
-  background: radial-gradient(circle at 32% 28%, #ff5566, #d4202f 55%, #a30f1c);
-  box-shadow: inset -4px -5px 0 #0002, 0 2px 0 #7e0c16;
-}
-.hat::after {
-  content: ''; position: absolute; left: -4%; right: -4%; bottom: -10%; height: 26%;
-  border-radius: 999px; background: #b3121f; box-shadow: 0 2px 0 #7e0c16;
 }
 
 /* ===== QOĞAL (yumru çörək) ===== */

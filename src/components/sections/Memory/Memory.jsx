@@ -3,6 +3,7 @@ import { m } from 'framer-motion'
 import { useApp } from '@/context/AppContext'
 import Button from '@/components/ui/Button'
 import styles from './Memory.module.css'
+import { SECTION } from '@/data/nav'
 
 const MAX_FLOWERS = 40
 
@@ -10,7 +11,7 @@ export default function Memory() {
   const { t } = useApp()
   const [count, setCount] = useState(0)
   return (
-    <section id="yaddas" className={styles.mem}>
+    <section id={SECTION.memory} className={styles.mem}>
       <h2 className={styles.title}>{t.memH}</h2>
       <p className={styles.lead}>{t.memLead}</p>
 

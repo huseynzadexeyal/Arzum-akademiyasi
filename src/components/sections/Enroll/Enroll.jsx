@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button'
 import Lead from '@/components/ui/Lead'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import styles from './Enroll.module.css'
+import { SECTION } from '@/data/nav'
 
 const PHONE_RE = /^(\+?994|0)?(50|51|55|70|77|99|10)\d{7}$/
 const FIELDS = [['name', 'text'], ['phone', 'tel'], ['age', 'number']]
@@ -41,7 +42,7 @@ export default function Enroll() {
   }
 
   return (
-    <Section id="qeydiyyat" tone="cta" className={styles.enroll}>
+    <Section id={SECTION.enroll} tone="cta" className={styles.enroll}>
       <div>
         <SectionTitle>{t.enrH}</SectionTitle>
         <Lead>{t.enrLead} <a href={telHref}>{contact.phone}</a></Lead>
