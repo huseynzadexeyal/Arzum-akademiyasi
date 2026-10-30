@@ -15,6 +15,7 @@ export default function Find() {
     <Section id={SECTION.find} tone="find" className={styles.find}>
       <SectionTitle>{t.findH}</SectionTitle>
       <Lead>{t.addr}</Lead>
+      <p className={styles.about}>{t.findText}</p>
       <div className={styles.map}>
         {showMap ? (
           <iframe title={t.findH} referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${q}&output=embed`} />

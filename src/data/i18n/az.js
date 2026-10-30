@@ -1,6 +1,6 @@
 const az = {
-  title: 'Şəhid Vüsal Məmmədov adına Bağça və İnkişaf Mərkəzi, Binəqədi | Arzum Akademiya',
-  desc: 'Arzum Akademiya Binəqədi, Bakıda Şəhid Vüsal Məmmədov adına bağça və inkişaf mərkəzidir: məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar, kukla teatrı. Qeydiyyat: 051 429 65 63.', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
+  title: 'Binəqədi bağça: Şəhid Vüsal Məmmədov adına bağça | Arzum Akademiyası',
+  desc: 'Arzum Akademiyası: Binəqədidə Şəhid Vüsal Məmmədov adına bağça. Məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar, kukla teatrı. Qeydiyyat: 051 429 65 63.', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
   nav: { act: 'Fəaliyyət', thr: 'Teatr', staff: 'Kollektiv', mem: 'Yaddaş', gal: 'Qalereya', enr: 'Qeydiyyat' },
   skip: 'Əsas məzmuna keç',
   callNow: 'Zəng edin', waLabel: 'WhatsApp-da yazın',
@@ -37,7 +37,7 @@ const az = {
   e: ['Valideynin adını yazın.', 'Düzgün nömrə yazın, məsələn: 051 123 45 67.', 'Uşağın yaşı 1 ilə 7 arasında olmalıdır.'],
   ok: 'Mesaj hazırdır. WhatsApp-da göndərin, tezliklə cavab verəcəyik.',
   showMap: 'Xəritəni göstər',
-  findH: 'Bizi Binəqədidə tapın', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
+  findH: 'Bizi Binəqədidə tapın', findText: 'Arzum Akademiyası Binəqədi rayonunda yerləşən Şəhid Vüsal Məmmədov adına bağça və uşaq inkişaf mərkəzidir. Binəqədidə bağça axtaran valideynlər üçün məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar və kukla teatrı fəaliyyət göstərir.', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
 }
 
 export default az

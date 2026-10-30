@@ -33,7 +33,7 @@ Google adətən bir neçə gün-həftəyə saytı indeksləyir.
 ## 4. Axtarış sözləri və saytda harada işlənib
 | Axtarış | Harada var |
 | --- | --- |
-| Şəhid Vüsal Məmmədov adına bağça (Binəqədi) | başlıq (`<title>`), təsvir, ilk başlıq (kicker), schema |
+| Binəqədi bağça / Arzum Akademiyası / Şəhid Vüsal Məmmədov adına bağça | başlıq (`<title>`), təsvir, ilk başlıq (kicker), "Bizi Binəqədidə tapın" mətni, schema (`alternateName`) |
 | Binəqədi uşaq inkişaf mərkəzi | başlıq, təsvir, schema, statik məzmun |
 | Binəqədi məktəbə hazırlıq | "Fəaliyyət" bölməsi, təsvir, schema |
 | uşaq rəsm / rəqs dərnəyi Binəqədi | "Fəaliyyət" bölməsi, schema |
