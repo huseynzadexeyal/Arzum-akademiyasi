@@ -21,3 +21,8 @@ export const PROPS = [
   [], // Tısbağa və dovşan: dekor RaceScene SVG-sidir
   [], // Zoluşka: dekor BallScene SVG-sidir
 ]
+
+// Videosu olan nağıllar: səhnədə animasiya əvəzinə video oynayır (açar = nağılın sırası)
+export const VIDEOS = {
+  1: { src: '/videos/cirtdan-kukla-teatri.mp4', poster: '/videos/cirtdan-kukla-teatri.jpg' }, // Cırtdan
+}

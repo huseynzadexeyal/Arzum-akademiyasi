@@ -35,7 +35,7 @@ export default function Nav() {
       </nav>
 
       <div className={styles.tools}>
-        <div className={styles.langs} role="group" aria-label="Language">
+        <div className={styles.langs} role="group" aria-label={t.langLabel}>
           {LANGS.map((l) => (
             <button key={l} className={styles.chip} aria-pressed={lang === l} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
           ))}

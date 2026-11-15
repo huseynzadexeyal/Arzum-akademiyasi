@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { storage } from '@/utils/storage'
 import { isNight } from '@/utils/sun'
 
@@ -26,6 +26,6 @@ export function useTheme() {
 
   useEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
 
-  const setMode = (m) => { setModeState(m); storage.set('themeMode', m) }
+  const setMode = useCallback((m) => { setModeState(m); storage.set('themeMode', m) }, [])
   return { mode, setMode, theme }
 }

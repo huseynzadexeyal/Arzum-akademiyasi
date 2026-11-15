@@ -1,4 +1,7 @@
 const az = {
+  vPlay: 'Oynat', vPause: 'Dayandır', vSound: 'Səsi aç', vMute: 'Səsi söndür',
+  langLabel: 'Dil', lbClose: 'Bağla', lbPrev: 'Əvvəlki', lbNext: 'Növbəti', city: 'Bakı',
+  waFallback: 'WhatsApp açılmadısa, buraya basın', consent: 'Məlumatlar yalnız qeydiyyat üçün WhatsApp mesajı kimi göndərilir.',
   title: 'Binəqədi bağça: Şəhid Vüsal Məmmədov adına bağça | Arzum Akademiyası',
   desc: 'Arzum Akademiyası: Binəqədidə Şəhid Vüsal Məmmədov adına bağça. Məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar, kukla teatrı. Qeydiyyat: 051 429 65 63.', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
   nav: { act: 'Fəaliyyət', thr: 'Teatr', staff: 'Kollektiv', mem: 'Yaddaş', gal: 'Qalereya', enr: 'Qeydiyyat' },

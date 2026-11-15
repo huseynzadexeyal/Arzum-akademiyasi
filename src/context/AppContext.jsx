@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { T } from '@/data/i18n'
 import { storage } from '@/utils/storage'
 import { useTheme } from '@/hooks/useTheme'
@@ -11,10 +11,8 @@ export function AppProvider({ children }) {
   const { mode, setMode, theme } = useTheme()
   const t = T[lang] || T.az
 
-  const value = useMemo(() => ({
-    t, lang, theme, mode, setMode,
-    setLang: (l) => { setLangState(l); storage.set('lang', l) },
-  }), [t, lang, theme, mode]) // eslint-disable-line react-hooks/exhaustive-deps
+  const setLang = useCallback((l) => { setLangState(l); storage.set('lang', l) }, [])
+  const value = useMemo(() => ({ t, lang, theme, mode, setMode, setLang }), [t, lang, theme, mode, setMode, setLang])
 
   useEffect(() => {
     document.documentElement.lang = lang

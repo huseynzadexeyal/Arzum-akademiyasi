@@ -18,6 +18,8 @@ export default function Activities() {
         <SectionTitle>{t.actH}</SectionTitle>
         <div className={styles.zones}>
           {t.acts.map(([title, text], i) => (
+            // Dekorativ: klik yalnız konfeti səpir, məlumat daşımır (klaviatura istifadəçisi heç nə itirmir)
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
             <article key={title} className={`${styles.zone} ${styles[ICONS[i][1]]}`} onClick={fireConfetti}>
               <span className={styles.tag} aria-hidden="true">0{i + 1}</span>
               <span className={styles.ico} aria-hidden="true">{ICONS[i][0]}</span>

@@ -2,16 +2,22 @@ import { useEffect, useRef, useState } from 'react'
 import { useApp } from '@/context/AppContext'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import { fireConfetti } from '@/components/ui/Confetti'
-import { PUPPETS, PROPS, face } from '@/data/theatre'
-import { Puppet, RedHoodScene, CirtdanScene, QogalScene, TiqScene, RaceScene, BallScene } from './Puppets'
+import { PUPPETS, PROPS, VIDEOS, face } from '@/data/theatre'
+import { SECTION } from '@/data/nav'
+import { useInViewOnce } from '@/hooks/useInViewOnce'
+import { Puppet, Kid, RedHoodScene, CirtdanScene, QogalScene, TiqScene, RaceScene, BallScene } from './Puppets'
+import styles from './Theatre.module.css'
 
 // Hər nağılın SVG dekoru (sıra t.thTales ilə eynidir)
 const SCENES = [RedHoodScene, CirtdanScene, QogalScene, TiqScene, RaceScene, BallScene]
-import { SECTION } from '@/data/nav'
-import { useInViewOnce } from '@/hooks/useInViewOnce'
-import styles from './Theatre.module.css'
 
-const AUDIENCE = Array.from({ length: 18 }, (_, i) => 34 + ((i * 17) % 30))
+// Tamaşaçı uşaqlar: hər birinin dərisi, saçı, köynəyi və saç düzümü fərqlidir
+const SKIN = ['#ffd9b8', '#f1c196', '#d9a074', '#b97a4f']
+const HAIR = ['#3b2412', '#6b3a1c', '#e6b64a', '#1d1208', '#b4532a']
+const SHIRT = ['#ff6b81', '#4aa3e0', '#ffd23f', '#7bc45e', '#a874dc', '#ff9f1c']
+const AUDIENCE = Array.from({ length: 20 }, (_, i) => ({
+  skin: SKIN[(i * 3) % 4], hair: HAIR[(i * 2 + 1) % 5], shirt: SHIRT[i % 6], look: i % 5, dy: [10, 0, 14, 4, 18, 2, 12, 6][i % 8],
+}))
 
 // Kukla teatrı: pərdə açılır, kuklalar danışır (altyazı balonu), sonda tamaşaçılar alqışlayır.
 export default function Theatre() {
@@ -25,16 +31,21 @@ export default function Theatre() {
   const [poke, setPoke] = useState(null) // klik edilən kukla
   const stageRef = useRef(null)
   const timer = useRef(0)
+  const videoRef = useRef(null)
+  const frame = useRef(0) // pointermove üçün requestAnimationFrame
+  const [vPlaying, setVPlaying] = useState(false)
+  const [vMuted, setVMuted] = useState(false)
+  const video = VIDEOS[tale] // varsa, səhnədə animasiya yerinə video oynayır
 
   // Səhnə ekrana çıxanda pərdə özü açılır
-  useInViewOnce(stageRef, () => { timer.current = setTimeout(() => setOpen(true), 500) }, 0.6)
-  useEffect(() => () => clearTimeout(timer.current), [])
+  useInViewOnce(stageRef, () => { timer.current = setTimeout(() => setOpen(true), 500) }, 0.4)
+  useEffect(() => () => { clearTimeout(timer.current); cancelAnimationFrame(frame.current) }, [])
 
   // Tamaşa ssenarisi: pərdə açılandan sonra replikalar ardıcıl səslənir, axırda alqış
   useEffect(() => {
-    setStep(-1)
-    setClap(false)
-    if (!open) return undefined
+    // Dəyişiklikdə (pərdə bağlandı, nağıl dəyişdi, "yenidən göstər", dil) köhnə vəziyyət təmizlənir
+    const reset = () => { setStep(-1); setClap(false) }
+    if (!open || VIDEOS[tale]) return reset
     const lines = t.thTales[tale][2]
     const ids = lines.map((_, i) => setTimeout(() => setStep(i), 1500 + i * 3000))
     ids.push(setTimeout(() => {
@@ -42,12 +53,32 @@ export default function Theatre() {
       setClap(true)
       if (stageRef.current) fireConfetti({ currentTarget: stageRef.current, clientX: 0, clientY: 0 })
     }, 1500 + lines.length * 3000))
-    return () => ids.forEach(clearTimeout)
+    return () => { ids.forEach(clearTimeout); reset() }
   }, [open, tale, run, t])
+
+  // Video: pərdə açılanda başlayır, bağlananda dayanır, "yenidən göstər" başa qaytarır
+  useEffect(() => {
+    const v = videoRef.current
+    if (!video || !v) return undefined
+    if (!open) { v.pause(); return undefined }
+    v.currentTime = 0
+    // Hərəkəti azaltmış istifadəçi üçün video özü başlamır (oynat düyməsi var)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => v.pause()
+    const go = v.play()
+    // Brauzer səsli avtomatik oynatmanı bloklasa (NotAllowedError), səssiz başlayır.
+    // Pərdə tez bağlananda pause() "AbortError" verir: bu halda videonu yenidən BAŞLATMIRIQ.
+    if (go) go.catch((err) => { if (err.name === 'NotAllowedError') { v.muted = true; v.play().catch(() => {}) } })
+    return () => v.pause()
+  }, [open, video, run])
+
+  const videoEnded = () => {
+    setClap(true)
+    if (stageRef.current) fireConfetti({ currentTarget: stageRef.current, clientX: 0, clientY: 0 })
+  }
 
   const pick = (i) => (e) => {
     fireConfetti(e)
-    if (i === sel) { setOpen(true); setRun((n) => n + 1); return }
+    if (i === sel && tale === sel) { setOpen(true); setRun((n) => n + 1); return } // keçid gedirsə, aşağıda davam edir
     clearTimeout(timer.current)
     setSel(i)
     setOpen(false)
@@ -61,11 +92,15 @@ export default function Theatre() {
   // Bəbəklər kursoru izləyir: re-render olmadan CSS dəyişənləri yazılır
   const look = (e) => {
     const el = stageRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    const c = (v) => Math.max(-1, Math.min(1, v)).toFixed(2)
-    el.style.setProperty('--lx', c(((e.clientX - r.left) / r.width) * 2 - 1))
-    el.style.setProperty('--ly', c(((e.clientY - r.top) / r.height) * 2 - 1))
+    if (!el || !open || e.pointerType === 'touch') return // toxunuşda (scroll zamanı) boş yerə işləməsin
+    const { clientX, clientY } = e
+    cancelAnimationFrame(frame.current)
+    frame.current = requestAnimationFrame(() => { // kadrda bir dəfə: hər pikseldə stil hesablanmasın
+      const r = el.getBoundingClientRect()
+      const c = (v) => Math.max(-1, Math.min(1, v)).toFixed(2)
+      el.style.setProperty('--lx', c(((clientX - r.left) / r.width) * 2 - 1))
+      el.style.setProperty('--ly', c(((clientY - r.top) / r.height) * 2 - 1))
+    })
   }
   const lookAway = () => {
     stageRef.current?.style.setProperty('--lx', '0')
@@ -94,21 +129,48 @@ export default function Theatre() {
       <SectionTitle>{t.thH}</SectionTitle>
       <p className={styles.lead}>{t.thLead}</p>
 
+      {/* Səhnəyə klik pərdəni açır (siçan üçün rahatlıq); klaviatura/ekran oxuyucu üçün aşağıdakı düymə var */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         ref={stageRef}
         className={styles.stage}
         data-open={open}
         data-scene={tale}
+        data-video={Boolean(video)}
         onClick={() => { if (!open) setOpen(true) }}
         onPointerMove={look}
         onPointerLeave={lookAway}
       >
         <div className={styles.scene}>
-          {(() => { const Scene = SCENES[tale]; return Scene ? <Scene /> : null })()}
-          {PROPS[tale].map(([emoji, l, b, s], i) => (
+          {!video && (() => { const Scene = SCENES[tale]; return Scene ? <Scene /> : null })()}
+          {!video && PROPS[tale].map(([emoji, l, b, s], i) => (
             <span key={`p${tale}-${i}`} className={styles.prop} aria-hidden="true" style={{ left: `${l}%`, bottom: `${b}%`, '--s': s, '--d': `${i * 0.7}s` }}>{emoji}</span>
           ))}
-          <div className={styles.puppets} key={tale}>
+          {video && (
+            <div className={styles.videoBox} key={`v${tale}`}>
+              {/* eslint-disable-next-line jsx-a11y/media-has-caption -- kukla tamaşası videosudur, altyazı mətni yoxdur */}
+              <video
+                ref={videoRef}
+                className={styles.video}
+                src={video.src}
+                poster={video.poster}
+                title={title}
+                aria-label={title}
+                playsInline
+                preload="metadata"
+                onEnded={videoEnded}
+                onPlay={() => setVPlaying(true)}
+                onPause={() => setVPlaying(false)}
+                onVolumeChange={(e) => setVMuted(e.currentTarget.muted)}
+                onClick={(e) => e.stopPropagation()}
+              />
+              <div className={styles.vctrl}>
+                <button type="button" aria-label={vPlaying ? t.vPause : t.vPlay} onClick={(e) => { e.stopPropagation(); const v = videoRef.current; if (v) (v.paused ? v.play() : v.pause()) }}>{vPlaying ? '⏸' : '▶'}</button>
+                <button type="button" aria-label={vMuted ? t.vSound : t.vMute} onClick={(e) => { e.stopPropagation(); const v = videoRef.current; if (v) v.muted = !v.muted }}>{vMuted ? '🔇' : '🔊'}</button>
+              </div>
+            </div>
+          )}
+          {!video && <div className={styles.puppets} key={tale}>
             {PUPPETS[tale].map((p, i) => (
               <span
                 key={i}
@@ -116,12 +178,12 @@ export default function Theatre() {
                 style={{ '--i': i, '--sz': p.size || 1, order: p.o ?? i }}
                 aria-hidden="true"
                 onClick={poked(i)}
-                onAnimationEnd={() => setPoke(null)}
+                onAnimationEnd={(e) => { if (e.target === e.currentTarget) setPoke(null) }}
               >
                 {p.k ? <Puppet kind={p.k} talking={who === i} /> : p.bun ? <b className={styles.bun} /> : p.e}
               </span>
             ))}
-          </div>
+          </div>}
         </div>
 
         <i className={`${styles.beam} ${styles.b1}`} aria-hidden="true" />
@@ -139,8 +201,13 @@ export default function Theatre() {
 
         <div className={styles.foot} aria-hidden="true" />
         <div className={styles.audience} data-clap={clap} aria-hidden="true">
-          {AUDIENCE.map((h, i) => <i key={i} style={{ '--h': h, '--i': i }} />)}
+          {AUDIENCE.map((k, i) => (
+            <span key={i} className={styles.kid} style={{ '--i': i, '--dy': `${k.dy}%` }}>
+              <Kid skin={k.skin} hair={k.hair} shirt={k.shirt} look={k.look} cheer={clap} />
+            </span>
+          ))}
         </div>
+        <p className="sr-only" role="status">{line ? line[1] : ''}</p>
         {clap && (
           <div className={styles.clap} aria-hidden="true">
             <b>{t.thApplause}</b>

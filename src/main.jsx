@@ -1,5 +1,21 @@
 import { createRoot } from 'react-dom/client'
 import App from './App'
+// Şriftlər saytın özündən yüklənir (Google Fonts-a sorğu yoxdur): latin + latin-ext (ə, ğ, ı, ö, ş, ü, ç) + kiril (rus dili)
+import '@fontsource/onest/latin-400.css'
+import '@fontsource/onest/latin-500.css'
+import '@fontsource/onest/latin-700.css'
+import '@fontsource/onest/latin-ext-400.css'
+import '@fontsource/onest/latin-ext-500.css'
+import '@fontsource/onest/latin-ext-700.css'
+import '@fontsource/onest/cyrillic-400.css'
+import '@fontsource/onest/cyrillic-500.css'
+import '@fontsource/onest/cyrillic-700.css'
+import '@fontsource/unbounded/latin-500.css'
+import '@fontsource/unbounded/latin-700.css'
+import '@fontsource/unbounded/latin-ext-500.css'
+import '@fontsource/unbounded/latin-ext-700.css'
+import '@fontsource/unbounded/cyrillic-500.css'
+import '@fontsource/unbounded/cyrillic-700.css'
 import './styles/global.css'
 
 createRoot(document.getElementById('root')).render(<App />)

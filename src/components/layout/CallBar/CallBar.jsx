@@ -1,5 +1,5 @@
 import { useApp } from '@/context/AppContext'
-import { contact, telHref } from '@/data/contact'
+import { contact, telHref, waHref } from '@/data/contact'
 import Icon from '@/components/ui/Icon'
 import styles from './CallBar.module.css'
 
@@ -7,7 +7,7 @@ import styles from './CallBar.module.css'
 export default function CallBar() {
   const { t } = useApp()
   return (
-    <div className={styles.bar}>
+    <aside className={styles.bar} aria-label={t.callNow}>
       <a className={styles.call} href={telHref} aria-label={`${t.callNow}: ${contact.phone}`}>
         <span className={styles.ico} aria-hidden="true">
           <Icon name="phone" size={22} />
@@ -17,9 +17,9 @@ export default function CallBar() {
           <b>{contact.phone}</b>
         </span>
       </a>
-      <a className={styles.wa} href={`https://wa.me/${contact.wa}`} target="_blank" rel="noreferrer" aria-label={t.waLabel}>
+      <a className={styles.wa} href={waHref} target="_blank" rel="noreferrer" aria-label={t.waLabel}>
         <Icon name="whatsapp" size={24} />
       </a>
-    </div>
+    </aside>
   )
 }

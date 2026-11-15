@@ -2,22 +2,15 @@ import { useApp } from '@/context/AppContext'
 import { hideOnError } from '@/utils/dom'
 import styles from './Memorial.module.css'
 
-const LOCAL = '/photos/vusal.jpg'
-const REMOTE = 'http://binegedi-ih.gov.az/storage/files/images/M%C9%99mm%C9%99dov%20V%C3%BCsal%20Aftandil%20o%C4%9Flu.jpg'
-
-// Əvvəl yerli şəkil, yoxdursa rəsmi saytdakı şəkil, o da yüklənməsə gizlənir.
-const onPhotoError = (e) => {
-  if (e.target.src.endsWith(LOCAL)) e.target.src = REMOTE
-  else hideOnError(e)
-}
+const PHOTO = '/photos/vusal.jpg'
 
 export default function Memorial() {
   const { t } = useApp()
   return (
-    <section className={styles.memorial}>
-      <img className={styles.photo} src={LOCAL} alt={t.mrl[2]} onError={onPhotoError} />
+    <section className={styles.memorial} aria-labelledby="memorial-title">
+      <img className={styles.photo} src={PHOTO} alt={t.mrl[2]} width="399" height="501" loading="lazy" decoding="async" onError={hideOnError} />
       <div>
-        <h2 className={styles.title}>{t.mrl[0]}</h2>
+        <h2 id="memorial-title" className={styles.title}>{t.mrl[0]}</h2>
         <p className={styles.name}>{t.mrlName}</p>
         <dl className={styles.facts}>
           {t.mrlFacts.map(([k, v]) => (

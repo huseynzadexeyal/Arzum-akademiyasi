@@ -22,3 +22,6 @@
   .form { padding: 22px 18px; border-radius: 22px; }
   .form .submit { justify-self: stretch; }
 }
+
+.note { grid-column: 1 / -1; font-size: 0.85rem; opacity: 0.85; }
+.ok a { font-weight: 700; text-decoration: underline; }

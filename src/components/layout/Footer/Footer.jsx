@@ -7,11 +7,12 @@ export default function Footer() {
   return (
     <footer className={styles.foot}>
       <p>{t.center}</p>
-      <address className={styles.addr}>{t.addr}, Bakı</address>
+      <address className={styles.addr}>{t.addr}, {t.city}</address>
       <p className={styles.links}>
         <a href={telHref}>{contact.phone}</a>
         <a href={contact.instagram} target="_blank" rel="noreferrer">Instagram</a>
       </p>
+      <small>© {new Date().getFullYear()} Arzum Akademiya</small>
     </footer>
   )
 }

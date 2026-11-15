@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useApp } from '@/context/AppContext'
 import { contact } from '@/data/contact'
 import { ALBUMS } from '@/data/albums'
@@ -22,6 +22,8 @@ export default function Gallery() {
   const { t } = useApp()
   const [open, setOpen] = useState(null) // { a: albom, i: şəkil nömrəsi }
   const album = open ? ALBUMS[open.a] : null
+  // stabil funksiya: Lightbox-un klaviatura dinləyicisi hər renderdə yenidən qurulmasın
+  const change = useCallback((i) => setOpen((o) => (i === null || !o ? null : { ...o, i })), [])
 
   return (
     <Section id={SECTION.gallery} tone="gallery">
@@ -46,7 +48,8 @@ export default function Gallery() {
         title={album ? t.albums[open.a][1] : ''}
         emoji={album ? album.emoji : ''}
         empty={t.galEmpty}
-        onChange={(i) => setOpen(i === null ? null : { ...open, i })}
+        labels={{ close: t.lbClose, prev: t.lbPrev, next: t.lbNext }}
+        onChange={change}
       />
     </Section>
   )

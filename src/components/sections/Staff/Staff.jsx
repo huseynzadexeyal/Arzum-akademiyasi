@@ -17,6 +17,8 @@ export default function Staff() {
       <p className={styles.lead}>{t.stLead}</p>
       <ul className={styles.grid}>
         {staff.map((p, i) => (
+          // Dekorativ klik (konfeti): məlumat daşımır
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
           <li key={i} className={`${styles.card} ${styles[COLORS[i % COLORS.length]]}`} onClick={fireConfetti}>
             <div className={styles.photo}>
               <span className={styles.emoji} aria-hidden="true">{p.emoji}</span>

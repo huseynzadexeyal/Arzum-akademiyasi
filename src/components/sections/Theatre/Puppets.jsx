@@ -697,6 +697,52 @@ function Fox() {
   )
 }
 
+
+// Tamaşaçı uşaqlar: gülür, yırğalanır, alqış zamanı əl çalıb tullanır (Theatre.jsx-də səhnənin önündə dayanırlar).
+const HAIR_STYLE = {
+  0: (h) => <path d="M14 28 Q12 6 32 6 Q52 6 50 28 Q44 16 32 18 Q20 16 14 28Z" fill={h} />,
+  1: (h) => (
+    <>
+      <path d="M14 28 Q12 6 32 6 Q52 6 50 28 Q44 16 32 18 Q20 16 14 28Z" fill={h} />
+      <circle cx="11" cy="30" r="7" fill={h} /><circle cx="53" cy="30" r="7" fill={h} />
+      <rect x="9" y="22" width="5" height="4" rx="2" fill="#ff6b81" /><rect x="50" y="22" width="5" height="4" rx="2" fill="#ff6b81" />
+    </>
+  ),
+  2: (h) => <g fill={h}>{[[16, 20], [22, 11], [32, 8], [42, 11], [48, 20], [14, 30], [50, 30]].map(([x, y]) => <circle key={x} cx={x} cy={y} r="8" />)}</g>,
+  3: (h) => (
+    <>
+      <path d="M14 30 Q10 6 32 6 Q54 6 50 30 Q46 14 30 18 Q20 18 14 30Z" fill={h} />
+      <path d="M40 10 L52 4 L52 16Z M40 10 L28 4 L28 16Z" fill="#ff5c8a" transform="translate(4 2)" /><circle cx="44" cy="12" r="3.4" fill="#d83a6a" />
+    </>
+  ),
+  4: (h, shirt) => (
+    <>
+      <path d="M14 26 Q14 6 32 6 Q50 6 50 26 Z" fill={shirt} />
+      <path d="M12 26 L52 26 Q58 26 56 30 L10 30 Q8 26 12 26Z" fill={shirt} stroke="#0003" strokeWidth=".8" />
+      <path d="M13 28 Q9 36 11 42 M51 28 Q55 36 53 42" stroke={h} strokeWidth="5" fill="none" strokeLinecap="round" />
+    </>
+  ),
+}
+
+export function Kid({ skin, hair, shirt, look = 0, cheer = false }) {
+  return (
+    <svg className={styles.kidSvg} viewBox="0 0 64 72" data-talk={cheer} data-cheer={cheer} aria-hidden="true" focusable="false">
+      <path d="M4 72 Q6 48 32 46 Q58 48 60 72Z" fill={shirt} />
+      <path d="M26 46 Q32 54 38 46" fill="none" stroke="#fff" strokeWidth="2.4" opacity=".6" strokeLinecap="round" />
+      <circle cx="32" cy="28" r="17" fill={skin} />
+      {HAIR_STYLE[look](hair, shirt)}
+      <g className={styles.eyes}>
+        <circle cx="25" cy="29" r="2.5" fill="#241208" /><circle cx="39" cy="29" r="2.5" fill="#241208" />
+        <circle cx="25.9" cy="28.1" r=".8" fill="#fff" /><circle cx="39.9" cy="28.1" r=".8" fill="#fff" />
+      </g>
+      <circle cx="20" cy="35" r="3.6" fill="#ff7a8a" opacity=".5" /><circle cx="44" cy="35" r="3.6" fill="#ff7a8a" opacity=".5" />
+      <g className={styles.mouth}><path d="M25 34 Q32 39 39 34 Q38 44 32 44 Q26 44 25 34Z" fill="#8a2230" /></g>
+      <circle className={styles.handL} cx="10" cy="62" r="5.4" fill={skin} />
+      <circle className={styles.handR} cx="54" cy="62" r="5.4" fill={skin} />
+    </svg>
+  )
+}
+
 const CHAR = { hood: Hood, wolf: Wolf, granny: Granny, tom: Tom, elder: Elder, giant: Giant, bun: Bun, rabbit: Rabbit, wolfy: (p) => <Wolf {...p} dressed />, fox: Fox, roach: Roach, mouse: Mouse, frog: Frog, cat: Cat, turtle: Turtle, hare: (p) => <Rabbit {...p} sporty />, cinder: Cinder, prince: Prince, fairy: Fairy }
 
 export function Puppet({ kind, talking = false, head = false }) {

@@ -32,11 +32,16 @@
 @media (hover: hover) { .zone:hover { transform: translateY(-8px) rotate(0); box-shadow: 0 16px 0 var(--c); } }
 .zone:active { transform: translateY(2px); box-shadow: 0 4px 0 var(--c); }
 
-.red   { --c: #f0344b; }
-.green { --c: #3fae2a; }
-.blue  { --c: #00b5e2; }
-.sun   { --c: #ffc83d; }
+/* --c: zonanın fon/kölgə rəngi, --h: başlıq yazısı rəngi (ağ fonda kontrast ≥ 4.5) */
+.red   { --c: #d6203a; --h: #d6203a; }
+.green { --c: #2c8419; --h: #2c8419; }
+.blue  { --c: #00b5e2; --h: #087391; }
+.sun   { --c: #ffc83d; --h: #7a4f00; }
 :global([data-theme='dark']) .zone { background: #2a2640; color: #eaf2f8; }
+:global([data-theme='dark']) .red   { --h: #ff7d8c; } /* tünd fonda başlıqlar daha açıq */
+:global([data-theme='dark']) .green { --h: #6fd25a; }
+:global([data-theme='dark']) .blue  { --h: #4cc9f0; }
+:global([data-theme='dark']) .sun   { --h: #ffc83d; }
 
 /* böyük dairəvi ikon, kartın üstünə çıxıb */
 .ico {
@@ -59,8 +64,7 @@
 }
 .red .tag, .green .tag { color: #fff; }
 
-.zone h3 { margin-bottom: 8px; font-size: 1.05rem; color: var(--c); }
-.sun h3 { color: #d98f00; }
+.zone h3 { margin-bottom: 8px; font-size: 1.05rem; color: var(--h, var(--c)); }
 .zone p { font-size: 0.95rem; line-height: 1.5; }
 
 /* balonlar */

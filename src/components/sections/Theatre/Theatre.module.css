@@ -39,6 +39,19 @@
 }
 
 /* ===== KUKLALAR ===== */
+.stage[data-video='true'] { aspect-ratio: 624 / 1000; max-width: 440px; }
+.stage[data-video='true'] .beam, .stage[data-video='true'] .foot { display: none; }
+
+/* Video: pərdənin içində, səhnənin ortasında (valance ilə tamaşaçılar arasında) */
+.videoBox { position: absolute; inset: 0; z-index: 2; }
+.video { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; cursor: default; }
+.vctrl { position: absolute; top: 50px; right: 50px; z-index: 8; display: flex; gap: 8px; }
+.vctrl button {
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 2px solid #fff8; border-radius: 50%;
+  background: #000a; color: #fff; font-size: 1.05rem; line-height: 1; cursor: pointer; backdrop-filter: blur(4px);
+}
+.vctrl button:hover { background: #000d; }
+
 .puppets {
   position: absolute; inset: auto 0 0 0; height: 80%; padding-bottom: 17%; z-index: 2;
   display: flex; justify-content: center; align-items: flex-end; gap: clamp(8px, 3vw, 36px);
@@ -139,14 +152,15 @@
 @keyframes blink { 50% { opacity: 0.45; } }
 
 /* ===== TAMAŞAÇILAR ===== */
-.audience { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; display: flex; align-items: flex-end; height: 13%; pointer-events: none; }
-.audience i {
-  position: relative; flex: 1; height: calc(var(--h) * 1%); margin: 0 -1%; border-radius: 40% 40% 0 0; background: #150a26;
+.audience { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; display: flex; align-items: flex-end; pointer-events: none; }
+.audience > .kid {
+  flex: 1 1 0; min-width: 0; max-width: 60px; margin: 0 -7px; translate: 0 var(--dy, 0%); transform-origin: 50% 100%;
+  animation: sway 3.2s ease-in-out calc(var(--i) * -0.45s) infinite alternate;
 }
-.audience i::before {
-  content: ''; position: absolute; left: 50%; top: -55%; translate: -50% 0; width: 78%; aspect-ratio: 1; border-radius: 50%; background: #150a26;
-}
-.audience[data-clap='true'] i { animation: cheer 0.45s ease-in-out calc(var(--i) * 0.06s) infinite alternate; }
+.audience[data-clap='true'] > .kid { animation: cheer 0.45s ease-in-out calc(var(--i) * 0.06s) infinite alternate; }
+.stage[data-video='true'] .audience > .kid:nth-child(n + 11) { display: none; }
+@media (max-width: 800px) { .audience > .kid:nth-child(n + 13) { display: none; } }
+@keyframes sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
 @keyframes cheer { to { transform: translateY(-22%); } }
 
 /* ===== ALQIŞ ===== */
@@ -188,7 +202,6 @@
   .stage[data-scene='2'] .puppet, .stage[data-scene='3'] .puppet { font-size: calc(clamp(2.1rem, 10.5vw, 3.2rem) * var(--sz, 1)); }
   .say { top: 32px; max-width: 94%; gap: 8px; padding: 5px 12px 5px 5px; font-size: 0.74rem; line-height: 1.25; }
   .say i { font-size: 1.05em; }
-  .audience { height: 12%; }
   .foot { bottom: 11%; }
 
   /* düymələr: "Pərdəni aç" tam en, nağıllar 2 sütun */
@@ -202,7 +215,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .puppet, .curtain, .beam { transition: none; }
-  .stage[data-open='true'] .puppet, .stage[data-open='true'] .puppet.talk, .beam, .foot, .clap span, .audience[data-clap='true'] i { animation: none; }
+  .stage[data-open='true'] .puppet, .stage[data-open='true'] .puppet.talk, .beam, .foot, .clap span, .audience > .kid, .audience[data-clap='true'] > .kid { animation: none; }
 }
 
 /* ===== QOĞAL (yumru çörək) ===== */

@@ -7,7 +7,7 @@ export default class ErrorBoundary extends Component {
 
   static getDerivedStateFromError() { return { failed: true } }
 
-  componentDidCatch(error) { console.error(error) } // eslint-disable-line no-console
+  componentDidCatch(error) { console.error(error) }
 
   render() {
     if (!this.state.failed) return this.props.children

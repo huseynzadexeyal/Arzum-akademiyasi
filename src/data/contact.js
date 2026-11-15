@@ -7,3 +7,4 @@ export const contact = {
 }
 
 export const telHref = `tel:+${contact.wa}`
+export const waHref = `https://wa.me/${contact.wa}`

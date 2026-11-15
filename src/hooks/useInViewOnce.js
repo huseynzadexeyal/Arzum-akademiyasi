@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 // Element ilk dəfə ekranda göründükdə (threshold qədər) callback-i bir dəfə çağırır.
 export function useInViewOnce(ref, onEnter, threshold = 0.5) {
   const cb = useRef(onEnter)
-  cb.current = onEnter
+  useEffect(() => { cb.current = onEnter }) // ən son callback həmişə saxlanır (renderdə yox, effektdə)
 
   useEffect(() => {
     const el = ref.current

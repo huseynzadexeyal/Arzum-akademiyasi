@@ -15,6 +15,8 @@ export default function Sun() {
 
   return (
     <div className={styles.wrap} aria-hidden="true">
+      {/* Dekorativ (aria-hidden): günəşə klik konfeti səpir */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div key={joy} className={`${styles.sun} ${joy ? styles.joy : ''}`} onClick={onClick}>
       {/* 1-ci qat: parıltı + ləçəklər (yalnız bu qat dönür, brauzer GPU ilə edir) */}
       <svg className={styles.rays} viewBox="-170 -170 340 340">

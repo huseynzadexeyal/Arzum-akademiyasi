@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { m } from 'framer-motion'
 import styles from './Confetti.module.css'
 
@@ -6,6 +6,7 @@ const COLORS = ['#00B5E2', '#EF3340', '#509E2F', '#FFC83D']
 
 // Konfeti öz komponentində: kliklər bütün səhifəni yenidən render etmir.
 let emit = () => {}
+let seq = 0 // benzərsiz açarlar üçün sayğac (təsadüfi ədədlər toqquşa bilər)
 
 // onClick={fireConfetti} kimi istifadə olunur.
 export const fireConfetti = (e) => {
@@ -15,22 +16,29 @@ export const fireConfetti = (e) => {
 
 export default function Confetti() {
   const [bits, setBits] = useState([])
+  const timers = useRef(new Set())
 
   useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const pending = timers.current
     emit = (x, y) => {
+      if (reduce.matches) return // hərəkətdən narahat olanlara konfeti göstərilmir
       const n = window.innerWidth < 800 ? 9 : 14
-      const id = Math.random()
       const add = Array.from({ length: n }, (_, i) => ({
-        id: id + i, x, y,
+        id: ++seq, x, y,
         dx: (Math.random() - 0.5) * 320,
         dy: -60 - Math.random() * 180,
         c: COLORS[i % COLORS.length],
         r: Math.random() * 540,
       }))
       setBits((b) => [...b, ...add])
-      setTimeout(() => setBits((b) => b.filter((k) => !add.includes(k))), 1000)
+      const id = setTimeout(() => {
+        pending.delete(id)
+        setBits((b) => b.filter((k) => !add.includes(k)))
+      }, 1000)
+      pending.add(id)
     }
-    return () => { emit = () => {} }
+    return () => { emit = () => {}; pending.forEach(clearTimeout); pending.clear() }
   }, [])
 
   return (
