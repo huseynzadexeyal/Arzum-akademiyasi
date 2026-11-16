@@ -6,6 +6,7 @@ export const SECTION = {
   staff: 'kollektiv',
   memory: 'yaddas',
   gallery: 'qalereya',
+  faq: 'suallar',
   enroll: 'qeydiyyat',
   find: 'xerite',
 }

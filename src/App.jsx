@@ -17,6 +17,7 @@ import Staff from '@/components/sections/Staff'
 import Memorial from '@/components/sections/Memorial'
 import Memory from '@/components/sections/Memory'
 import Gallery from '@/components/sections/Gallery'
+import Faq from '@/components/sections/Faq'
 import Enroll from '@/components/sections/Enroll'
 import Find from '@/components/sections/Find'
 
@@ -40,6 +41,7 @@ export default function App() {
             <Memorial />
             <Memory />
             <Gallery />
+            <Faq />
             <Enroll />
             <Find />
           </main>

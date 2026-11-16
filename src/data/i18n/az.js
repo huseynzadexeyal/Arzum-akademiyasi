@@ -40,6 +40,15 @@ const az = {
   e: ['Valideynin adını yazın.', 'Düzgün nömrə yazın, məsələn: 051 123 45 67.', 'Uşağın yaşı 1 ilə 7 arasında olmalıdır.'],
   ok: 'Mesaj hazırdır. WhatsApp-da göndərin, tezliklə cavab verəcəyik.',
   showMap: 'Xəritəni göstər',
+  faqH: 'Tez-tez verilən suallar',
+  faq: [
+    ['Hansı yaşdakı uşaqlar qəbul olunur?', 'Qeydiyyat 1 yaşdan 7 yaşa qədər uşaqlar üçündür. Qrup və şərtlər barədə dəqiq məlumat üçün {tel} nömrəsi ilə əlaqə saxlayın.'],
+    ['Burada hansı fəaliyyətlər var?', 'Məktəbə hazırlıq, rəsm və yaradıcılıq, rəqs və səhnə, kiçik aşpazlar dərsləri və kukla teatri.'],
+    ['Necə qeydiyyatdan keçə bilərəm?', 'Saytdakı qeydiyyat formunu doldurun: məlumat WhatsApp mesajı kimi bizə çatır. İstəsəniz, {tel} nömrəsinə zəng edə və ya WhatsApp-da yaza bilərsiniz.'],
+    ['Qiymət və iş saatları necədir?', 'Qiymət və iş saatları barədə dəqiq məlumatı {tel} nömrəsinə zəng edərək və ya WhatsApp-da yazaraq öyrənə bilərsiniz.'],
+    ['Akademiya harada yerləşir?', 'Bakının Binəqədi rayonunda. Xəritə və yol göstərişi səhifənin sonundakı "Bizi Binəqədidə tapın" bölməsindədir.'],
+    ['Kukla teatri nədir?', 'Akademiyada uşaqlar üçün kukla teatri fəaliyyət göstərir. "Teatr" bölməsində Qırmızı Papaq, Cırtdan, Qoğal və digər nağıl səhnələrinə baxa bilərsiniz.'],
+  ],
   findH: 'Bizi Binəqədidə tapın', findText: 'Arzum Akademiyası Binəqədi rayonunda yerləşən Şəhid Vüsal Məmmədov adına bağça və uşaq inkişaf mərkəzidir. Binəqədidə bağça axtaran valideynlər üçün məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar və kukla teatrı fəaliyyət göstərir.', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
 }
 
