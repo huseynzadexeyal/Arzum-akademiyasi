@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: { node-version-file: .nvmrc, cache: npm }
       - run: npm install --no-audit --no-fund   # package-lock.json vitest-i ehtiva edəndən sonra `npm ci`-yə keçin
       - run: npm run lint
