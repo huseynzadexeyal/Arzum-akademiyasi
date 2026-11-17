@@ -26,8 +26,9 @@ export default function Memory() {
       </div>
 
       <div>
-        <Button onClick={() => setCount(count + 1)}>{t.carn}</Button>
-        <div className={styles.row} aria-live="polite">
+        <Button onClick={() => setCount((n) => n + 1)}>{t.carn}</Button>
+        <div aria-live="polite">
+          <div className={styles.row} aria-hidden="true">
           {Array.from({ length: Math.min(count, MAX_FLOWERS) }).map((_, i) => (
             <m.span
               key={i}
@@ -40,6 +41,7 @@ export default function Memory() {
           ))}
         </div>
         {count > 0 && <p>{t.carnOk}</p>}
+        </div>
       </div>
     </section>
   )

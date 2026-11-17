@@ -13,8 +13,8 @@ function launchChecks(site) {
     name: 'launch-checks',
     buildStart() {
       if (!site) this.warn('VITE_SITE_URL boşdur: canonical, sitemap.xml və sosial önizləmə yaranmır (.env.production yaradın, bax .env.example).')
-      if (read('src/data/staff.js').includes("'Ad Soyad'")) this.warn("src/data/staff.js: kollektivdə hələ 'Ad Soyad' nümunələri var, real adlarla əvəz edin.")
-      if (read('src/data/contact.js').includes('dəqiq ünvanla əvəz edin')) this.warn('src/data/contact.js: mapQuery dəqiq ünvanla əvəz olunmayıb (xəritə və yol göstərişi buna baxır).')
+      if (/name: ''/.test(read('src/data/staff.js'))) this.warn("src/data/staff.js: kollektivdə hələ boş ad (name: '') var, real ad və şəkillərlə doldurun.")
+      if (read('src/data/contact.js').includes('// TODO: dəqiq ünvanla əvəz edin')) this.warn('src/data/contact.js: mapQuery dəqiq ünvanla əvəz olunmayıb (xəritə və yol göstərişi buna baxır).')
       const gallery = 'src/assets/gallery'
       const hasMedia = existsSync(gallery) && readdirSync(gallery, { recursive: true }).some((f) => /\.(jpe?g|png|webp|avif|gif|mp4|webm|mov|m4v)$/i.test(f))
       if (!hasMedia) this.warn('Qalereya boşdur: src/assets/gallery/<albom>/ qovluqlarına şəkil və video əlavə edin.')

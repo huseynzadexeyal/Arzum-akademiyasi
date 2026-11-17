@@ -4,7 +4,7 @@ const az = {
   waFallback: 'WhatsApp açılmadısa, buraya basın', consent: 'Məlumatlar yalnız qeydiyyat üçün WhatsApp mesajı kimi göndərilir.',
   title: 'Binəqədi bağça: Şəhid Vüsal Məmmədov adına bağça | Arzum Akademiyası',
   desc: 'Arzum Akademiyası: Binəqədidə Şəhid Vüsal Məmmədov adına bağça. Məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar, kukla teatrı. Qeydiyyat: 051 429 65 63.', menu: 'Əsas menyu', theme: 'Qaranlıq və işıqlı rejim',
-  nav: { act: 'Fəaliyyət', thr: 'Teatr', staff: 'Kollektiv', mem: 'Yaddaş', gal: 'Qalereya', enr: 'Qeydiyyat' },
+  nav: { act: 'Fəaliyyət', thr: 'Teatr', staff: 'Kollektiv', mem: 'Yaddaş', gal: 'Qalereya', faq: 'Suallar', enr: 'Qeydiyyat' },
   skip: 'Əsas məzmuna keç',
   callNow: 'Zəng edin', waLabel: 'WhatsApp-da yazın',
   modes: { auto: 'Avtomatik: gün batanda qaranlıq olur', light: 'İşıqlı', dark: 'Qaranlıq' },
@@ -43,11 +43,11 @@ const az = {
   faqH: 'Tez-tez verilən suallar',
   faq: [
     ['Hansı yaşdakı uşaqlar qəbul olunur?', 'Qeydiyyat 1 yaşdan 7 yaşa qədər uşaqlar üçündür. Qrup və şərtlər barədə dəqiq məlumat üçün {tel} nömrəsi ilə əlaqə saxlayın.'],
-    ['Burada hansı fəaliyyətlər var?', 'Məktəbə hazırlıq, rəsm və yaradıcılıq, rəqs və səhnə, kiçik aşpazlar dərsləri və kukla teatri.'],
+    ['Burada hansı fəaliyyətlər var?', 'Məktəbə hazırlıq, rəsm və yaradıcılıq, rəqs və səhnə, kiçik aşpazlar dərsləri və kukla teatrı.'],
     ['Necə qeydiyyatdan keçə bilərəm?', 'Saytdakı qeydiyyat formunu doldurun: məlumat WhatsApp mesajı kimi bizə çatır. İstəsəniz, {tel} nömrəsinə zəng edə və ya WhatsApp-da yaza bilərsiniz.'],
     ['Qiymət və iş saatları necədir?', 'Qiymət və iş saatları barədə dəqiq məlumatı {tel} nömrəsinə zəng edərək və ya WhatsApp-da yazaraq öyrənə bilərsiniz.'],
     ['Akademiya harada yerləşir?', 'Bakının Binəqədi rayonunda. Xəritə və yol göstərişi səhifənin sonundakı "Bizi Binəqədidə tapın" bölməsindədir.'],
-    ['Kukla teatri nədir?', 'Akademiyada uşaqlar üçün kukla teatri fəaliyyət göstərir. "Teatr" bölməsində Qırmızı Papaq, Cırtdan, Qoğal və digər nağıl səhnələrinə baxa bilərsiniz.'],
+    ['Kukla teatrı nədir?', 'Akademiyada uşaqlar üçün kukla teatrı fəaliyyət göstərir. "Teatr" bölməsində Qırmızı papaq, Cırtdan, Qoğal və digər nağıl səhnələrinə baxa bilərsiniz.'],
   ],
   findH: 'Bizi Binəqədidə tapın', findText: 'Arzum Akademiyası Binəqədi rayonunda yerləşən Şəhid Vüsal Məmmədov adına bağça və uşaq inkişaf mərkəzidir. Binəqədidə bağça axtaran valideynlər üçün məktəbə hazırlıq, rəsm, rəqs, kiçik aşpazlar və kukla teatrı fəaliyyət göstərir.', addr: 'Binəqədi rayonu, G. Ramazanov küçəsi', route: 'Yol tap', center: 'Arzum Akademiya Təlim Mərkəzi',
 }

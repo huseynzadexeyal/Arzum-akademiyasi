@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   [SECTION.staff, 'staff'],
   [SECTION.memory, 'mem'],
   [SECTION.gallery, 'gal'],
+  [SECTION.faq, 'faq'],
   [SECTION.enroll, 'enr'],
 ]
 

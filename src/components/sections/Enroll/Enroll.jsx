@@ -6,19 +6,9 @@ import Lead from '@/components/ui/Lead'
 import Section, { SectionTitle } from '@/components/ui/Section'
 import styles from './Enroll.module.css'
 import { SECTION } from '@/data/nav'
+import { validate } from '@/utils/validate'
 
-// Azərbaycan mobil nömrəsi: +994 / 994 / 0 ilə və ya prefikssiz (kodlar: 10, 50, 51, 55, 60, 70, 77, 99)
-const PHONE_RE = /^(\+?994|0)?(10|50|51|55|60|70|77|99)\d{7}$/
 const FIELDS = [['name', 'text', 'name'], ['phone', 'tel', 'tel'], ['age', 'number', 'off']] // [açar, type, autocomplete]
-
-function validate(f, t) {
-  const errors = {}
-  if (f.name.trim().length < 2) errors.name = t.e[0]
-  if (!PHONE_RE.test(f.phone.replace(/[\s-]/g, ''))) errors.phone = t.e[1]
-  const age = Number(f.age)
-  if (!f.age || !Number.isInteger(age) || age < 1 || age > 7) errors.age = t.e[2]
-  return errors
-}
 
 // Backend yoxdur: yoxlanılmış məlumat WhatsApp mesajı kimi açılır.
 export default function Enroll() {
@@ -29,8 +19,9 @@ export default function Enroll() {
   const refs = useRef({})
 
   const change = (key) => (e) => {
-    setForm({ ...form, [key]: e.target.value })
-    setErrors({ ...errors, [key]: '' })
+    const { value } = e.target
+    setForm((f) => ({ ...f, [key]: value }))
+    setErrors((er) => ({ ...er, [key]: '' }))
   }
 
   const submit = (ev) => {

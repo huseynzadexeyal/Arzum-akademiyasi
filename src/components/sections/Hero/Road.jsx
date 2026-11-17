@@ -15,7 +15,7 @@ const pop = (delay) => ({
 export default function Road() {
   const { t } = useApp()
   return (
-    <svg viewBox="0 0 520 440" className={styles.road} role="img" aria-label={t.h1}>
+    <svg viewBox="0 0 520 440" className={styles.road} role="img" aria-label={t.road.join(' → ')}>
       <m.path d={PATH} fill="none" className={styles.rd} stroke="#0A2540" strokeWidth="26" strokeLinecap="round"
         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2.8, ease: 'easeInOut' }} />
       <m.path d={PATH} fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeDasharray="2 14"

@@ -22,10 +22,9 @@ export default function Staff() {
           <li key={i} className={`${styles.card} ${styles[COLORS[i % COLORS.length]]}`} onClick={fireConfetti}>
             <div className={styles.photo}>
               <span className={styles.emoji} aria-hidden="true">{p.emoji}</span>
-              <img src={`/photos/staff/${p.photo}`} alt={p.name} loading="lazy" decoding="async" onError={hideOnError} />
+              {p.photo && <img src={`/photos/staff/${p.photo}`} alt={p.name || p.role[lang] || p.role.az} loading="lazy" decoding="async" onError={hideOnError} />}
             </div>
-            <h3>{p.name}</h3>
-            <p>{p.role[lang] || p.role.az}</p>
+            {p.name ? <><h3>{p.name}</h3><p>{p.role[lang] || p.role.az}</p></> : <h3>{p.role[lang] || p.role.az}</h3>}
           </li>
         ))}
       </ul>

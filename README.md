@@ -107,3 +107,7 @@ Netlify/Vercel üçün: build command `npm run build`, publish directory `dist`.
 - Şriftlər: **Unbounded** (başlıqlar) + **Onest** (mətn), Google Fonts.
 - Forma dili: həndəsi fiqurlar (dairə, səkkizbucaqlı, yarpaq), markiz kənarı, bayraq rəngləri (mavi / qırmızı / yaşıl).
 - Bölmə fonları: `components/ui/Section/Section.module.css` (`tone` prop).
+
+## Test və CI
+
+`npm test` (Vitest): telefon yoxlaması, AZ/RU i18n uyğunluğu, nağıl məlumatlarının tamlığı. `.github/workflows/ci.yml` hər push-da lint, test, build və audit işlədir. `public/_headers` təhlükəsizlik və keş başlıqlarıdır (Netlify/Cloudflare Pages).

@@ -7,7 +7,10 @@ const AppContext = createContext(null)
 
 // Bütün səhifə üçün ümumi vəziyyət: dil (t = həmin dilin mətnləri) və tema.
 export function AppProvider({ children }) {
-  const [lang, setLangState] = useState(() => storage.get('lang', 'az'))
+  const [lang, setLangState] = useState(() => {
+    const l = storage.get('lang', 'az')
+    return Object.hasOwn(T, l) ? l : 'az'
+  })
   const { mode, setMode, theme } = useTheme()
   const t = T[lang] || T.az
 

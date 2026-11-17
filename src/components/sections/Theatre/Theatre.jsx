@@ -31,6 +31,7 @@ export default function Theatre() {
   const [poke, setPoke] = useState(null) // klik edilən kukla
   const stageRef = useRef(null)
   const timer = useRef(0)
+  const intro = useRef(0) // səhnə ilk görünəndə pərdəni açan taymer
   const videoRef = useRef(null)
   const frame = useRef(0) // pointermove üçün requestAnimationFrame
   const [vPlaying, setVPlaying] = useState(false)
@@ -38,8 +39,8 @@ export default function Theatre() {
   const video = VIDEOS[tale] // varsa, səhnədə animasiya yerinə video oynayır
 
   // Səhnə ekrana çıxanda pərdə özü açılır
-  useInViewOnce(stageRef, () => { timer.current = setTimeout(() => setOpen(true), 500) }, 0.4)
-  useEffect(() => () => { clearTimeout(timer.current); cancelAnimationFrame(frame.current) }, [])
+  useInViewOnce(stageRef, () => { intro.current = setTimeout(() => setOpen(true), 500) }, 0.4)
+  useEffect(() => () => { clearTimeout(timer.current); clearTimeout(intro.current); cancelAnimationFrame(frame.current) }, [])
 
   // Tamaşa ssenarisi: pərdə açılandan sonra replikalar ardıcıl səslənir, axırda alqış
   useEffect(() => {
@@ -80,6 +81,7 @@ export default function Theatre() {
     fireConfetti(e)
     if (i === sel && tale === sel) { setOpen(true); setRun((n) => n + 1); return } // keçid gedirsə, aşağıda davam edir
     clearTimeout(timer.current)
+    clearTimeout(intro.current)
     setSel(i)
     setOpen(false)
     // pərdə bağlanır, dekor dəyişir, pərdə yenidən açılır

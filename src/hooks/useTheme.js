@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { storage } from '@/utils/storage'
 import { isNight } from '@/utils/sun'
 
@@ -18,14 +18,18 @@ export function useTheme() {
   useEffect(() => {
     if (mode !== 'auto') return undefined
     const check = () => setNight(isNight())
-    check()
     const id = setInterval(check, 60000)
     document.addEventListener('visibilitychange', check)
     return () => { clearInterval(id); document.removeEventListener('visibilitychange', check) }
   }, [mode])
 
-  useEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
+  // layout effekt: tema ilk boyadan əvvəl qoyulur, səhv rəngli bir kadr görünmür
+  useLayoutEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
 
-  const setMode = useCallback((m) => { setModeState(m); storage.set('themeMode', m) }, [])
+  const setMode = useCallback((m) => {
+    if (m === 'auto') setNight(isNight()) // avtomatikə qayıdanda vəziyyət dərhal təzələnir
+    setModeState(m)
+    storage.set('themeMode', m)
+  }, [])
   return { mode, setMode, theme }
 }

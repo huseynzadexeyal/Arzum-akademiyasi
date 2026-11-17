@@ -22,15 +22,17 @@ export default function Gallery() {
   const { t } = useApp()
   const [open, setOpen] = useState(null) // { a: albom, i: şəkil nömrəsi }
   const album = open ? ALBUMS[open.a] : null
+  const hasMedia = ALBUMS.some((a) => a.items.length > 0)
   // stabil funksiya: Lightbox-un klaviatura dinləyicisi hər renderdə yenidən qurulmasın
   const change = useCallback((i) => setOpen((o) => (i === null || !o ? null : { ...o, i })), [])
 
   return (
     <Section id={SECTION.gallery} tone="gallery">
       <SectionTitle>{t.galH}</SectionTitle>
-      <p className={styles.lead}>{t.galLead}</p>
-      <div className={styles.gal}>
+      <p className={styles.lead}>{hasMedia ? t.galLead : t.galEmpty}</p>
+      {hasMedia && <div className={styles.gal}>
         {ALBUMS.map((a, k) => {
+          if (!a.items.length) return null // yalnız doldurulmuş albomlar göstərilir
           const cover = a.items.find((x) => x.type === 'photo')
           return (
             <button key={a.slug} className={`${styles.item} ${styles[`c${k % 6}`]}`} onClick={() => setOpen({ a: k, i: 0 })}>
@@ -40,7 +42,7 @@ export default function Gallery() {
             </button>
           )
         })}
-      </div>
+      </div>}
       <Button variant="ghost" href={contact.instagram} target="_blank" rel="noreferrer">{t.galMore}</Button>
       <Lightbox
         items={album ? album.items : []}
