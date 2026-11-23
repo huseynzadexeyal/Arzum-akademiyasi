@@ -82,6 +82,8 @@ export default function Theatre() {
     if (i === sel && tale === sel) { setOpen(true); setRun((n) => n + 1); return } // keçid gedirsə, aşağıda davam edir
     clearTimeout(timer.current)
     clearTimeout(intro.current)
+    setVMuted(false) // yeni video səslə başlayır: köhnə nağılın düymə vəziyyəti qalmasın
+    setVPlaying(false)
     setSel(i)
     setOpen(false)
     // pərdə bağlanır, dekor dəyişir, pərdə yenidən açılır

@@ -52,7 +52,7 @@
   .links::-webkit-scrollbar { display: none; }
   .links a {
     flex: none; display: inline-flex; align-items: center; min-height: 38px; padding: 6px 15px; scroll-snap-align: center;
-    border-radius: 999px; background: color-mix(in srgb, var(--heading) 8%, transparent);
+    border-radius: 999px; background: rgba(128, 128, 128, 0.14); background: color-mix(in srgb, var(--heading) 8%, transparent);
     font-size: 0.9rem; font-weight: 600; white-space: nowrap; text-decoration: none;
     transition: background-color 0.2s, color 0.2s;
   }

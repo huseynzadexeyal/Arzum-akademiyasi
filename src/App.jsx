@@ -33,7 +33,7 @@ export default function App() {
           <TopStripe />
           {desktop && <Trail />}
           <Nav />
-          <main id="main">
+          <main id="main" tabIndex={-1}>
             <Hero />
             <Activities />
             <Theatre />

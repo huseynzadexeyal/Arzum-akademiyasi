@@ -47,6 +47,7 @@ export default function Enroll() {
         <div className={styles.ok} role="status">
           <p>{t.ok}</p>
           <p><a href={sent} target="_blank" rel="noopener noreferrer">{t.waFallback}</a></p>
+          <Button variant="ghost" onClick={() => { setSent(null); setForm({ name: '', phone: '', age: '' }); setErrors({}) }}>{t.again}</Button>
         </div>
       ) : (
         <form className={styles.form} onSubmit={submit} noValidate>

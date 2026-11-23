@@ -209,7 +209,7 @@
   .toggle { width: 100%; min-height: 48px; font-size: 1rem; }
   .tales { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .tale { min-height: 46px; padding: 6px 10px; font-size: 0.86rem; line-height: 1.2; }
-  .story { margin-top: 20px; padding: 16px 18px; border-radius: 20px; background: color-mix(in srgb, var(--heading) 7%, transparent); }
+  .story { margin-top: 20px; padding: 16px 18px; border-radius: 20px; background: rgba(128, 128, 128, 0.14); background: color-mix(in srgb, var(--heading) 7%, transparent); }
   .story h3 { font-size: 1.05rem; }
   .story p { font-size: 0.95rem; }
 }

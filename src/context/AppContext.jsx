@@ -9,7 +9,7 @@ const AppContext = createContext(null)
 export function AppProvider({ children }) {
   const [lang, setLangState] = useState(() => {
     const l = storage.get('lang', 'az')
-    return Object.hasOwn(T, l) ? l : 'az'
+    return Object.prototype.hasOwnProperty.call(T, l) ? l : 'az'
   })
   const { mode, setMode, theme } = useTheme()
   const t = T[lang] || T.az
